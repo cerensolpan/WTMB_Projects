@@ -8,26 +8,21 @@
 
 ## Technologies Used
 -  JavaScript
-- Node.js
 - Github
 
 ## How to Use
 Clone the repository:
 
     $ git clone https://github.com/cerensolpan/WTMB_Projects.git
-
+    
 Change into the directory:
 
     $ cd wtmbjs-2
-    
-Create node.js
 
-    $ npm init
+Install the npm packages
 
- Run the JS file:
+    $ npm install
 
-    $ node index.js
-    
-Install the library to project
+Run the project:
 
-    npm install chalk
+    $ npm start
