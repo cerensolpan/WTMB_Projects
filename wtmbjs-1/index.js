@@ -1,32 +1,36 @@
 // Create User class
-User = class {
+class User {
     constructor(userName) {
         this.userName = userName;
         this.playlist = [];
     }
     // Method for adding songs to user playlist
-    listenedPlaylist(song) {
+    addPlaylist(song) {
         this.playlist.push(song);
     }
     //Print method of listening songs to the console
-    listenedSong() {
-        this.playlist.forEach((element) => printListenedSongToConsole(element, this));
+    printPlaylist() {
+        this.playlist.forEach((element) => printPlaylistToConsole(element, this));
     }
 };
 
 // Print function
-printListenedSongToConsole = (song, user) =>
+printPlaylistToConsole = (song, user) =>
     console.log(user.userName + " is listening to " + song.songName);
 
 // Create Genre Class
-Genre = class {
+class Genre {
     constructor(genreName) {
         this.genreName = genreName;
-        this.songs = [];
+        this.playlist = [];
+    }
+    //Method for adding songs to user playlist
+    addPlaylist(song) {
+        this.playlist.push(song);
     }
     //Print method of genres songs to the console
-    genresSongs() {
-        this.songs.forEach((element) => printGenreSongsToConsole(element, this));
+    printPlaylist() {
+        this.playlist.forEach((element) => printGenreSongsToConsole(element, this));
     }
 };
 
@@ -37,13 +41,17 @@ printGenreSongsToConsole = (song, genre) =>
     );
 
 // Create Artist Class
-Artist = class {
+class Artist {
     constructor(artistName) {
         this.artistName = artistName;
         this.songs = [];
     }
+    // Method for adding songs to artist's song list
+    release(song) {
+        this.songs.push(song);
+    }
     //Print method of artist songs to the console
-    artistSongs() {
+    printArtistSongs() {
         this.songs.forEach((element) => printArtistSongsToConsole(element, this));
     }
 };
@@ -53,19 +61,9 @@ printArtistSongsToConsole = (song, artist) =>
     console.log(song.songName + " belongs to " + artist.artistName);
 
 // Create Song Class
-Song = class {
+class Song {
     constructor(songName) {
         this.songName = songName;
-    }
-    // Method for adding songs to genres
-    addSongToGenreList(genre) {
-        this.genre = genre;
-        genre.songs.push(this);
-    }
-    // Method for adding songs to artist song list
-    addSongToArtist(artist) {
-        this.artist = artist;
-        artist.songs.push(this);
     }
 };
 
@@ -79,36 +77,36 @@ giveUp = new Song(" I Won't Give Up");
 wait = new Song("Should I Wait");
 
 // Add song to user playlist
-ceren.listenedPlaylist(lucky);
-ceren.listenedPlaylist(wait);
-yasemin.listenedPlaylist(giveUp);
+ceren.addPlaylist(lucky);
+ceren.addPlaylist(wait);
+yasemin.addPlaylist(giveUp);
 
 // Create new Genre object
 pop = new Genre("Pop");
 blues = new Genre("Blues");
 
-// Add songs to genre list
-lucky.addSongToGenreList(pop);
-giveUp.addSongToGenreList(pop);
-wait.addSongToGenreList(blues);
+// Add song to genre list
+pop.addPlaylist(lucky);
+pop.addPlaylist(giveUp);
+blues.addPlaylist(wait);
 
 //Create new Artist object
 jason = new Artist("Jason Mraz");
 luther = new Artist("Luther Allison");
 
 // Add songs to artist
-lucky.addSongToArtist(jason);
-giveUp.addSongToArtist(jason);
-wait.addSongToArtist(luther);
+jason.release(lucky);
+jason.release(giveUp);
+luther.release(wait);
 
 // Implement User's listened song method
-ceren.listenedSong();
-yasemin.listenedSong();
+ceren.printPlaylist();
+yasemin.printPlaylist();
 
 //Implement Song's genre method
-pop.genresSongs();
-blues.genresSongs();
+pop.printPlaylist();
+blues.printPlaylist();
 
 //Implement Artist's song method
-jason.artistSongs();
-luther.artistSongs();
+jason.printArtistSongs();
+luther.printArtistSongs();
