@@ -4,8 +4,12 @@ module.exports = class Artist {
         this.artistName = artistName;
         this.songs = [];
     }
+    // Method for adding songs to artist's song list
+    release(song) {
+        this.songs.push(song);
+    }
     //Print method of artist songs to the console
-    artistSongs() {
+    printArtistSongs() {
         this.songs.forEach((element) => printArtistSongsToConsole(element, this));
     }
 };

@@ -5,14 +5,15 @@ module.exports = class User {
         this.playlist = [];
     }
     // Method for adding songs to user playlist
-    listenedPlaylist(song) {
+    addPlaylist(song) {
         this.playlist.push(song);
     }
     //Print method of listening songs to the console
-    listenedSong() {
-        this.playlist.forEach((element) => printListenedSongToConsole(element, this));
+    printPlaylist() {
+        this.playlist.forEach((element) => printPlaylistToConsole(element, this));
     }
 };
+
 // Print function
-printListenedSongToConsole = (song, user) =>
+printPlaylistToConsole = (song, user) =>
     console.log(user.userName + " is listening to " + song.songName);

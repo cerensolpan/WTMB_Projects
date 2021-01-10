@@ -2,11 +2,15 @@
 module.exports = class Genre {
     constructor(genreName) {
         this.genreName = genreName;
-        this.songs = [];
+        this.playlist = [];
+    }
+    //Method for adding songs to user playlist
+    addPlaylist(song) {
+        this.playlist.push(song);
     }
     //Print method of genres songs to the console
-    genresSongs() {
-        this.songs.forEach((element) => printGenreSongsToConsole(element, this));
+    printPlaylist() {
+        this.playlist.forEach((element) => printGenreSongsToConsole(element, this));
     }
 };
 
