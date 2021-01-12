@@ -1,0 +1,16 @@
+{
+  "name": "wtmbjs-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "circular-json": "^0.5.9",
+    "flatted": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ceren Solpan",
+  "license": "ISC"
+}
