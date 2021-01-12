@@ -9,10 +9,12 @@ module.exports = class Genre {
     addPlaylist(song) {
         this.playlist.push(song);
     }
+
     //Print method of genres songs to the console
     printPlaylist() {
         this.playlist.forEach((element) => printGenreSongsToConsole(element, this));
     }
+
     static create({
         genreName,
         playlist,

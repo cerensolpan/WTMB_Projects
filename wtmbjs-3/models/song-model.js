@@ -10,4 +10,4 @@ module.exports = class Song {
     }) {
         return new Song(songName, id);
     }
-};
+}

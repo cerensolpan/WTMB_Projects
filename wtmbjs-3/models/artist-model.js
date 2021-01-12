@@ -9,10 +9,12 @@ module.exports = class Artist {
     release(song) {
         this.songs.push(song);
     }
+
     //Print method of artist songs to the console
     printArtistSongs() {
         this.songs.forEach((element) => printArtistSongsToConsole(element, this));
     }
+
     static create({
         artistName,
         songs,

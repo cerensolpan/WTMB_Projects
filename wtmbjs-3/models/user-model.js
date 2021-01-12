@@ -9,6 +9,7 @@ module.exports = class User {
     addPlaylist(song) {
         this.playlist.push(song);
     }
+
     //Print method of listening songs to the console
     printPlaylist() {
         this.playlist.forEach((element) => printPlaylistToConsole(element, this));
