@@ -6,14 +6,14 @@ module.exports = class Artist {
         this.id = id;
     }
     // Method for adding songs to artist's song list
-    release(song) {
-        this.songs.push(song);
-    }
+    // release(song) {
+    //     this.songs.push(song);
+    // }
 
     //Print method of artist songs to the console
-    printArtistSongs() {
-        this.songs.forEach((element) => printArtistSongsToConsole(element, this));
-    }
+    // printArtistSongs() {
+    //     this.songs.forEach((element) => printArtistSongsToConsole(element, this));
+    // }
 
     static create({
         artistName,
@@ -25,5 +25,5 @@ module.exports = class Artist {
 };
 
 //Print function
-printArtistSongsToConsole = (song, artist) =>
-    console.log(song.songName + " belongs to " + artist.artistName);
+// printArtistSongsToConsole = (song, artist) =>
+//     console.log(song.songName + " belongs to " + artist.artistName);

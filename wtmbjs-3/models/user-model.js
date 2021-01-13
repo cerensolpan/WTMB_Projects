@@ -6,14 +6,14 @@ module.exports = class User {
         this.id = id;
     }
     // Method for adding songs to user playlist
-    addPlaylist(song) {
-        this.playlist.push(song);
-    }
+    // addPlaylist(song) {
+    //     this.playlist.push(song);
+    // }
 
     //Print method of listening songs to the console
-    printPlaylist() {
-        this.playlist.forEach((element) => printPlaylistToConsole(element, this));
-    }
+    // printPlaylist() {
+    //     this.playlist.forEach((element) => printPlaylistToConsole(element, this));
+    // }
 
     static create({
         userName,
@@ -25,5 +25,5 @@ module.exports = class User {
 };
 
 // Print function
-printPlaylistToConsole = (song, user) =>
-    console.log(user.userName + " is listening to " + song.songName);
+// printPlaylistToConsole = (song, user) =>
+//     console.log(user.userName + " is listening to " + song.songName);
