@@ -5,7 +5,7 @@ const User = require("./models/user-model");
 
 const ArtistService = require("./services/artist-service");
 const GenreService = require("./services/genre-service");
-const songService = require("./services/song-service");
+const SongService = require("./services/song-service");
 const UserService = require("./services/user-service");
 
 async function main() {
