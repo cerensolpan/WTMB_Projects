@@ -5,7 +5,7 @@ module.exports = class User {
         this.playlist = playlist;
         this.id = id;
     }
-    // Method for adding songs to user playlist
+    //Method for adding songs to user playlist
     // addPlaylist(song) {
     //     this.playlist.push(song);
     // }
