@@ -1,13 +1,13 @@
 // Create Song Class
 module.exports = class Song {
-    constructor(songName, id) {
-        this.songName = songName;
+    constructor(name, id) {
+        this.name = name;
         this.id = id;
     }
     static create({
-        songName,
+        name,
         id
     }) {
-        return new Song(songName, id);
+        return new Song(name, id);
     }
 }

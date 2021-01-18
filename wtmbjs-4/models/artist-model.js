@@ -1,7 +1,7 @@
 // Create Artist Class
 module.exports = class Artist {
-    constructor(artistName, songs = [], id) {
-        this.artistName = artistName;
+    constructor(name, songs = [], id) {
+        this.name = name;
         this.songs = songs;
         this.id = id;
     }
@@ -16,14 +16,14 @@ module.exports = class Artist {
     // }
 
     static create({
-        artistName,
+        name,
         songs,
         id
     }) {
-        return new Artist(artistName, songs, id);
+        return new Artist(name, songs, id);
     }
 };
 
 //Print function
 // printArtistSongsToConsole = (song, artist) =>
-//     console.log(song.songName + " belongs to " + artist.artistName);
+//     console.log(song.name + " is released by " + artist.name);

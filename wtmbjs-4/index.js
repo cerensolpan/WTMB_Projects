@@ -38,7 +38,7 @@ app.get('/user/:id', async (req, res) => {
     res.send(user);
 })
 
-// Add new user using the console to database (axios.post('/user', { userName: 'Aslı'}).then(console.log))
+// Add new user using the console to database (axios.post('/user', { name: 'Aslı'}).then(console.log))
 app.post('/user', async (req, res) => {
     const user = await UserService.add(req.body)
     res.send(user);
@@ -67,7 +67,7 @@ app.get('/song/:id', async (req, res) => {
     res.send(song);
 })
 
-// Add new song using the console to database (axios.post('/song', { songName: 'x'}).then(console.log))
+// Add new song using the console to database (axios.post('/song', { name: 'x'}).then(console.log))
 app.post('/song', async (req, res) => {
     const song = await SongService.add(req.body)
     res.send(song);
@@ -96,7 +96,7 @@ app.get('/artist/:id', async (req, res) => {
     res.send(artist);
 })
 
-// Add new artist using the console to database (axios.post('/artist', { artistName: 'x'}).then(console.log))
+// Add new artist using the console to database (axios.post('/artist', { name: 'x'}).then(console.log))
 app.post('/artist', async (req, res) => {
     const artist = await ArtistService.add(req.body)
     res.send(artist);
@@ -105,5 +105,34 @@ app.post('/artist', async (req, res) => {
 // Delete artist using the console to database (axios.delete('/artist/3').then(console.log))
 app.delete('/artist/:id', async (req, res) => {
     await ArtistService.del(req.params.id)
+    res.send('ok');
+})
+
+
+//GENRE
+
+//Get genres from the genre-database.json
+app.get('/genre/all', async (req, res) => {
+    const genres = await GenreService.findAll()
+    res.render('genre', {
+        genres
+    })
+})
+
+// Get genres from the genre-database.json
+app.get('/genre/:id', async (req, res) => {
+    const genre = await GenreService.find(req.params.id)
+    res.send(genre);
+})
+
+// Add new genre using the console to database (axios.post('/genre', { name: 'x'}).then(console.log))
+app.post('/genre', async (req, res) => {
+    const genre = await GenreService.add(req.body)
+    res.send(genre);
+})
+
+// Delete genre using the console to database (axios.delete('/genre/3').then(console.log))
+app.delete('/genre/:id', async (req, res) => {
+    await GenreService.del(req.params.id)
     res.send('ok');
 })

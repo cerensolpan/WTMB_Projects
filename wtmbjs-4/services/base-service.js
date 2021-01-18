@@ -59,7 +59,7 @@ module.exports = class Service {
         });
     }
 
-    async addPlaylist(id, song) {
+    async addSongToPlaylist(id, song) {
         const allItems = await this.findAll();
         const item = allItems.find((p) => p.id == id);
         item.playlist.push(song);

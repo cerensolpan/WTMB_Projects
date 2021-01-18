@@ -1,1 +1,1 @@
-[{"artistName":"Jason Mraz","songs":[{"songName":"Lucky","id":1},{"songName":"Lucky","id":1}],"id":1},{"artistName":"Luther Allison","songs":[{"songName":"Should I Wait","id":3},{"songName":"Should I Wait","id":3}],"id":2}]
+[{"name":"Jason Mraz","songs":[{"name":"Lucky","id":1},{"name":"Lucky","id":1}],"id":1},{"name":"Luther Allison","songs":[{"name":"Should I Wait","id":3},{"name":"Should I Wait","id":3}],"id":2}]
