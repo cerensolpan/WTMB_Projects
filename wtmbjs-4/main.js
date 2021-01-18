@@ -12,9 +12,9 @@ async function main() {
     // Step 1
 
     //Create new Song object
-    // const const lucky = new Song("Lucky");
-    // const const giveUp = new Song(" I Won't Give Up");
-    // const const wait = new Song("Should I Wait");
+    // const lucky = new Song("Lucky");
+    // const giveUp = new Song(" I Won't Give Up");
+    // const wait = new Song("Should I Wait");
 
     //Save songs to database
     // await SongService.add(lucky);
@@ -27,8 +27,8 @@ async function main() {
     // Step 2
 
     // Create new User objects
-    // const const ceren = new User("Ceren");
-    // const const yasemin = new User("Yasemin");
+    // const ceren = new User("Ceren");
+    // const yasemin = new User("Yasemin");
 
     // Save users to database
     // await UserService.add(ceren);
@@ -66,8 +66,8 @@ async function main() {
     // Step 5
 
     // Create new Genre object
-    // const const pop = new Genre("Pop");
-    // const const blues = new Genre("Blues");
+    // const pop = new Genre("Pop");
+    // const blues = new Genre("Blues");
 
     // Save genres to database
     // await GenreService.add(pop);
@@ -101,8 +101,8 @@ async function main() {
     // Step 8
 
     //Create new Artist object
-    // const const jason = new Artist("Jason Mraz");
-    // const const luther = new Artist("Luther Allison");
+    // const jason = new Artist("Jason Mraz");
+    // const luther = new Artist("Luther Allison");
     // Save Artist to database
     // await ArtistService.add(jason);
     // await ArtistService.add(luther);
