@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const GenreService = require("./services/genre-service");
+const GenreService = require("../services/genre-service");
 
 //GENRE
 
@@ -30,3 +30,5 @@ router.delete('/genre/:id', async (req, res) => {
     await GenreService.del(req.params.id)
     res.send('ok');
 })
+
+module.exports = router

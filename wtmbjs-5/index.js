@@ -2,23 +2,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-
+const artistRouter = require('./routes/artist-route');
+const genreRouter = require('./routes/genre-route');
+const songRouter = require('./routes/song-route');
+const userRouter = require('./routes/user-route');
 
 
 app.use(bodyParser.json());
-app.use('/artist', artistRouter);
 app.set('view engine', 'pug');
+require('./mongo-connection')
 
-const artistRouter = require('./routes/artist-route');
+
 app.use('/artist', artistRouter);
-
-const genreRouter = require('./routes/genre-route');
 app.use('/genre', genreRouter);
-
-const songRouter = require('./routes/song-route');
-app.use('/genre', songRouter);
-
-const userRouter = require('./routes/user-route');
+app.use('/song', songRouter);
 app.use('/user', userRouter);
 
 app.get('/', (req, res) => {

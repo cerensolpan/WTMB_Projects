@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const SongService = require("./services/song-service");
+const SongService = require("../services/song-service");
 
 //SONGS
 
@@ -30,3 +30,5 @@ router.delete('/song/:id', async (req, res) => {
     await SongService.del(req.params.id)
     res.send('ok');
 })
+
+module.exports = router

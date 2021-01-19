@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const UserService = require("./services/user-service");
+const UserService = require("../services/user-service");
 
 //USERS
 
@@ -30,3 +30,5 @@ router.delete('/user/:id', async (req, res) => {
     await UserService.del(req.params.id)
     res.send('ok');
 })
+
+module.exports = router
