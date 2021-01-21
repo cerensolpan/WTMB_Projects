@@ -3,9 +3,11 @@ const UserModel = require('../models/user-model');
 
 class UserService extends BaseService {
     model = UserModel
-    // constructor() {
-    //     super(UserModel, `${__dirname}/../user-database.json`);
-    // }
+
+    async addPlaylist(user, song) {
+        user.playlist.push(song)
+        await user.save()
+    }
 }
 
 module.exports = new UserService();

@@ -1,13 +1,32 @@
-// Create Song Class
-module.exports = class Song {
-    constructor(name, id) {
-        this.name = name;
-        this.id = id;
+const mongoose = require('mongoose')
+
+
+const SongSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        //default: "song",
+        required: true
+    },
+    artist: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Artist',
+        autopopulate: {
+            maxDepth: 1
+        }
+    },
+    genre: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Genre',
+        autopopulate: {
+            maxDepth: 1
+        }
     }
-    static create({
-        name,
-        id
-    }) {
-        return new Song(name, id);
-    }
-}
+}, {
+    timestamps: true
+})
+
+SongSchema.plugin(require('mongoose-autopopulate'))
+
+const SongModel = mongoose.model('Song', SongSchema)
+
+module.exports = SongModel;

@@ -1,29 +1,24 @@
-// Create User class
-module.exports = class User {
-    constructor(name, playlist = [], id) {
-        this.name = name;
-        this.playlist = playlist;
-        this.id = id;
-    }
-    //Method for adding songs to user playlist
-    // addSongToPlaylist(song) {
-    //     this.playlist.push(song);
-    // }
+const mongoose = require('mongoose');
 
-    //Print method of playlist to the console
-    // printPlaylist() {
-    //     this.playlist.forEach((element) => printUserSongToConsole(element, this));
-    // }
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        //default: "user"
+        required: true,
+    },
+    playlist: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Song',
+        autopopulate: {
+            maxDepth: 2
+        }
+    }],
 
-    static create({
-        name,
-        playlist,
-        id
-    }) {
-        return new User(name, playlist, id);
-    }
-};
+})
 
-// Print function
-// printUserSongToConsole = (song, user) =>
-//     console.log(user.name + " is listening to " + song.name);
+
+UserSchema.plugin(require('mongoose-autopopulate'))
+
+const UserModel = mongoose.model('User', UserSchema)
+
+module.exports = UserModel;

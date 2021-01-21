@@ -1,31 +1,26 @@
-// Create Genre Class
-module.exports = class Genre {
-    constructor(name, songs = [], id) {
-        this.name = name;
-        this.songs = songs;
-        this.id = id;
-    }
-    //Method for adding songs to genre songs
-    addSongToGenre(song) {
-        this.songs.push(song);
-    }
+const mongoose = require('mongoose');
 
-    //Print method of songs to the console
-    printSongs() {
-        this.playlist.forEach((element) => printGenreSongsToConsole(element, this));
-    }
+const GenreSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        //default: "genre",
+        required: true
+    },
+    songs: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Song',
+        autopopulate: {
+            maxDepth: 1
+        }
+    }],
+}, {
+    timestamps: true
+})
 
-    static create({
-        name,
-        songs,
-        id
-    }) {
-        return new Genre(name, songs, id);
-    }
-};
 
-// Print function
-printGenreSongsToConsole = (song, genre) =>
-    console.log(
-        song.name + " is a song in the " + genre.name + " genre. "
-    );
+
+GenreSchema.plugin(require('mongoose-autopopulate'))
+
+const GenreModel = mongoose.model('Genre', GenreSchema)
+
+module.exports = GenreModel

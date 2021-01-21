@@ -4,16 +4,19 @@ const mongoose = require('mongoose')
 const ArtistSchema = new mongoose.Schema({
     name: {
         type: String,
-        default: "artist",
+        required: true
     },
-    songs: []
+    songs: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Song',
+        autopopulate: {
+            maxDepth: 1
+        }
+    }],
+}, {
+    timestamps: true
 })
 
-ArtistSchema.methods.release = async function (song) {
-    this.songs.push(song)
-    console.log(song + " is released by " + this.name)
-    await this.save()
-}
 
 ArtistSchema.plugin(require('mongoose-autopopulate'))
 
