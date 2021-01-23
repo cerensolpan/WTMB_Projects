@@ -8,3 +8,7 @@
 /wtmbjs-5/node_modules/
 /wtmbjs-5/package-lock.json
 /wtmbjs-5/.env
+/wtmbjs-6/node_modules/
+/wtmbjs-6/package-lock.json
+/wtmbjs-6/.env
+/wtmbjs-6/.nyc_output
