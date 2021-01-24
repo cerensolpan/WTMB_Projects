@@ -9,9 +9,9 @@ test('Create new artist', async t => {
         name: 'Sia',
         songs: []
     }
-    const res = (await request(app)
+    const res = await request(app)
         .post('/artist')
-        .send(newArtist)).body
+        .send(newArtist)
 
     t.is(res.status, 200)
     t.is(res.body.name, newArtist.name)
@@ -19,21 +19,19 @@ test('Create new artist', async t => {
     t.deepEqual(res.body.playlist, newArtist.playlist)
 })
 
-test('New song released by artist', async t => {
-    t.plan(1)
+test("New song released by artist", async (t) => {
+    t.plan(1);
     const newSong = {
-        artistId: '60089d768dde461e50cb5e2b',
-        artistId: '600978742ea9694e3d4bbf57',
-        name: 'Diamond',
-    }
+        genreId: "600978742ea9694e3d4bbf57",
+        artistId: "60089d768dde461e50cb5e2b",
+        name: "Diamond",
+    };
 
     // release song
-    const res = (await request(app)
-        .post('/artist/release')
-        .send(newSong))
+    const res = await request(app).post("/artist/release").send(newSong);
 
-    t.is(res.status, 200)
-})
+    t.is(res.status, 200);
+});
 
 test('Delete a artist', async t => {
     t.plan(3)
@@ -59,11 +57,11 @@ test('Delete a artist', async t => {
     t.is(notFound.status, 404)
 })
 
-test('Get list of artist', async t => {
-    t.plan(1)
+test("Get list of artist", async (t) => {
+    t.plan(1);
 
-    // get the list of gender - render view
-    const res = await request(app).get('/artist/all')
+    // get the list of artist - render view
+    const res = await request(app).get("/artist/all");
     // checking for server response status success
-    t.is(res.status, 200)
-})
+    t.is(res.status, 200);
+});

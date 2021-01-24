@@ -9,9 +9,9 @@ test('Create new genre', async t => {
         songs: []
     }
     // create genre 
-    const res = (await request(app)
+    const res = await request(app)
         .post('/genre')
-        .send(newGenre)).body
+        .send(newGenre)
 
     // checking for server response status success
     t.is(res.status, 200)

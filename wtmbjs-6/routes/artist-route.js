@@ -22,8 +22,9 @@ router.get('/all', async (req, res) => {
 })
 
 // Get artists from the artist-database.json
-router.get('/:id', async (req, res) => {
-    const artist = await ArtistService.find(req.params.id)
+router.get("/:id", async (req, res) => {
+    const artist = await ArtistService.find(req.params.id);
+    if (!artist) res.status(404);
     res.send(artist);
 })
 

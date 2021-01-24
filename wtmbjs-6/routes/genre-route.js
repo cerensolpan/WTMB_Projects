@@ -16,6 +16,7 @@ router.get('/all', async (req, res) => {
 // Get genres from the genre-database.json
 router.get('/:id', async (req, res) => {
     const genre = await GenreService.find(req.params.id)
+    if (!genre) res.status(404);
     res.send(genre);
 })
 

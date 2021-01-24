@@ -21,19 +21,16 @@ test('Create new user', async t => {
 
 
 test('Song is added users playlist', async t => {
-    t.plan(3)
+    t.plan(1)
     const addPlaylist = {
-        userId: '60097df52474f6fbf032d634',
-        songId: '600c6968f2a87e2d8055fbed'
+        userId: '600b59f139f7ee212c1b274a',
+        songId: '600d8ff6932e85075c816ee6'
     }
-    // console.log(addPlaylist);
-    const res = (await request(app)
+    //console.log(addPlaylist);
+    const res = await request(app)
         .post('/user/add-playlist')
-        .send(addPlaylist))
-    console.log(res.body);
+        .send(addPlaylist)
     t.is(res.status, 200)
-    t.is(res.body.userId, addPlaylist.userId)
-    t.is(res.body.songId, addPlaylist.songId)
 })
 
 test('Get list of user', async t => {

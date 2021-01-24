@@ -16,6 +16,7 @@ router.get('/all', async (req, res) => {
 // Get songs from the song-database.json
 router.get('/:id', async (req, res) => {
     const song = await SongService.find(req.params.id)
+    if (!song) res.status(404);
     res.send(song);
 })
 

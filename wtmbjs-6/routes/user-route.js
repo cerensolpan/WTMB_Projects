@@ -17,6 +17,7 @@ router.get('/all', async (req, res) => {
 // Get user from the user-database.json
 router.get('/:id', async (req, res) => {
     const user = await UserService.find(req.params.id)
+    if (!user) res.status(404);
     res.send(user);
 })
 
