@@ -11,7 +11,10 @@
 ## Technologies Used
 
 -   JavaScript
--   Github
+-   Node.js
+-   Express.js
+-   Pug
+-   Github 
 
 ## How to Use
 Clone the repository:
@@ -30,6 +33,9 @@ Run the project:
 
     $ node index.js
 
+Run the project with nodemon:
+
+    $ nodemon index.js
 
 ## Instructions
 
