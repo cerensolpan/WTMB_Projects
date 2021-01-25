@@ -23,7 +23,7 @@ Clone the repository:
     
 Change into the directory:
 
-    $ cd wtmbjs-5
+    $ cd wtmbjs-6
 
 Install the npm packages:
 
