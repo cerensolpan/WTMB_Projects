@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 The number of the genre is #{genres.length}
+    each genre in genres
+      h4 id: #{genre.id}
+      h4 Genre: #{genre.name}
+      h4 Songs: #{ JSON.stringify(genre.songs)}

@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 The number of the people is #{users.length}
+    each user in users
+      h4 id: #{user.id}
+      h4 User: #{user.name}
+      h4 Playlist: #{ JSON.stringify(user.playlist)}
