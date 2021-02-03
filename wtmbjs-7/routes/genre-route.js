@@ -8,9 +8,12 @@ const GenreService = require("../services/genre-service");
 //Get genres from the genre-database.json
 router.get('/all', async (req, res) => {
     const genres = await GenreService.findAll()
-    res.render('genre', {
-        genres
-    })
+    res.send(genres)
+})
+
+router.get('/all/json', async (req, res) => {
+    const genres = await GenreService.findAll()
+    res.send(genres)
 })
 
 // Get genres from the genre-database.json

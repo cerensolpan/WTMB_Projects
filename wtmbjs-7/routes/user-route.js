@@ -9,15 +9,23 @@ const SongService = require("../services/song-service");
 // Get users from the user-database.json
 router.get('/all', async (req, res) => {
     const users = await UserService.findAll()
-    res.render('user', {
-        users
-    })
+    res.send(users)
+})
+
+router.get('/all/json', async (req, res) => {
+    const users = await UserService.findAll()
+    res.send(users)
 })
 
 // Get user from the user-database.json
 router.get('/:id', async (req, res) => {
     const user = await UserService.find(req.params.id)
     if (!user) res.status(404);
+    res.send(user);
+})
+
+router.get('/:id/json', async (req, res) => {
+    const user = await UserService.find(req.params.id)
     res.send(user);
 })
 
@@ -34,9 +42,18 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.post('/add-playlist', async (req, res) => {
+
     const user = await UserService.find(req.body.userId)
     const song = await SongService.find(req.body.songId)
     await UserService.addPlaylist(user, song)
+    res.send('ok');
+})
+
+router.delete('/delete-playlist', async (req, res) => {
+
+    const user = await UserService.find(req.body.userId)
+    const song = await SongService.find(req.body.songId)
+    await UserService.deletePlaylist(user, song)
     res.send('ok');
 })
 

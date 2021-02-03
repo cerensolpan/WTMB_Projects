@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Song',
         autopopulate: {
-            maxDepth: 2
+            maxDepth: 1
         }
     }],
 

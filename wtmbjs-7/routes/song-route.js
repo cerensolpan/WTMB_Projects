@@ -8,9 +8,7 @@ const SongService = require("../services/song-service");
 //Get songs from the song-database.json
 router.get('/all', async (req, res) => {
     const songs = await SongService.findAll()
-    res.render('song', {
-        songs
-    })
+    res.send(songs)
 })
 
 // Get songs from the song-database.json

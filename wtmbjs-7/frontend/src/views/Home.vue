@@ -1,32 +1,32 @@
 <script>
 // @ is an alias to /src
-import ArtistCard from "@/components/artist-card.vue";
+import UserCard from "@/components/user-card.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
-    ArtistCard,
+    UserCard,
   },
   computed: {
-    ...mapState(["artists", "counter"]),
+    ...mapState(["user", "users"]),
   },
   methods: {
-    ...mapActions(["fetchArtists", "incrementCounter"]),
+    ...mapActions(["fetchUser", "fetchUsers"]),
   },
   created() {
-    this.fetchArtists();
+    this.fetchUsers();
   },
 };
 </script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
 <template lang="pug">
-main 
+main.bg
   section
-    artist-card(v-for="artist in artists", :artist="artist")
-  section
-    button.increment-button(@click="incrementCounter") Increment
-    div {{ counter }}
+    h1 Please select user and go to to create playlist
+    h1 Selected User: {{ user.name }}
+  section.cards
+    user-card(v-for="user in users", :user="user")
 </template>
 
 <style scoped>
@@ -34,7 +34,14 @@ section {
   padding: 40px 0;
 }
 
-.increment-button {
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.select-button {
   color: green;
   padding: 10px 20px;
   border-radius: 8px;
@@ -46,7 +53,7 @@ section {
   margin-bottom: 20px;
 }
 
-.increment-button:hover {
+.select-button:hover {
   background-color: green;
   color: white;
 }

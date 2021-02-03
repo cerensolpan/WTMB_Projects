@@ -15,15 +15,11 @@ const Song = require('../models/song-model');
 //Get artists from the artist-database.json
 router.get('/all', async (req, res) => {
     const artists = await ArtistService.findAll();
-    console.log(artists);
-    res.render('artist', {
-        artists
-    })
+    res.send(artists)
 })
 
 router.get('/all/json', async (req, res) => {
     const artists = await ArtistService.findAll();
-    console.log(artists);
     res.send(artists)
 })
 

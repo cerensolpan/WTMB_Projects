@@ -1,20 +1,19 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import ItemCard from "@/components/item-card.vue";
-
 export default {
-  name: "Artist",
+  name: "Genre",
   components: {
     ItemCard,
   },
   computed: {
-    ...mapState(["user", "artists"]),
+    ...mapState(["user", "genres"]),
   },
   methods: {
-    ...mapActions(["fetchArtist", "fetchArtists"]),
+    ...mapActions(["fetchGenres"]),
   },
   created() {
-    this.fetchArtists();
+    this.fetchGenres();
   },
 };
 </script>
@@ -25,7 +24,7 @@ main
     h1 Select your songs and add playlist
   section.cards
     section.card
-      item-card(v-for="item in artists", :item="item", :key="item._id")
+      item-card(v-for="item in genres", :item="item", :key="item._id")
     section.playlist
       h2 {{ user.name }}'s Playlist
         h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}

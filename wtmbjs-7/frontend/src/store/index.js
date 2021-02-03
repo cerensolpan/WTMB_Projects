@@ -1,46 +1,91 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    counter: 0,
     artists: [],
-    artist: {}
+    artist: {},
+    users: [],
+    user: "",
+    genres: [],
+
   },
   mutations: {
-    SET_COUNTER(state, newCount) {
-      state.counter = newCount
-    },
     SET_ARTISTS(state, data) {
-      state.artists = data
+      state.artists = data;
     },
     SET_ARTIST(state, data) {
-      state.artist = data
-    }
-  },
-  actions: {
-    incrementCounter({
-      commit,
-      state
-    }) {
-      const newCount = state.counter + 1
-      commit('SET_COUNTER', newCount)
+      state.artist = data;
     },
+    SET_USERS(state, data) {
+      state.users = data;
+    },
+    SET_USER(state, data) {
+      state.user = data;
+    },
+    SET_GENRES(state, data) {
+      state.genres = data;
+    }
+
+  },
+
+  actions: {
     async fetchArtists({
       commit
     }) {
-      const result = await axios.get('http://localhost:3000/artist/all/json')
-      commit('SET_ARTISTS', result.data)
+      const result = await axios.get("http://localhost:3000/artist/all");
+      commit("SET_ARTISTS", result.data);
     },
+
     async fetchArtist({
       commit
     }, id) {
-      const result = await axios.get(`http://localhost:3000/artist/${id}/json`)
-      commit('SET_ARTIST', result.data)
-    }
+      const result = await axios.get(`http://localhost:3000/artist/${id}/json`);
+      commit("SET_ARTIST", result.data);
+    },
+
+    async fetchUsers({
+      commit
+    }, id) {
+      const result = await axios.get(`http://localhost:3000/user/all`);
+      commit("SET_USERS", result.data);
+    },
+
+    async fetchUser({
+      commit
+    }, user) {
+      commit("SET_USER", user.user);
+    },
+
+    async addSongsToPlaylist({
+      commit,
+    }, songId) {
+
+      let userId = this.state.user._id;
+      await axios({
+          method: 'post',
+          url: 'http://localhost:3000/user/add-playlist',
+          data: {
+            userId: userId,
+            songId: songId
+          }
+        }).then(res => console.log(res))
+        .catch(err => console.log(err));
+      const result = await axios.get(`http://localhost:3000/user/${userId}`);
+      commit("SET_USER", result.data);
+
+    },
+
+    async fetchGenres({
+      commit
+    }, id) {
+      const result = await axios.get(`http://localhost:3000/genre/all`);
+      commit("SET_GENRES", result.data);
+    },
+
   },
-  modules: {}
-})
+  modules: {},
+});

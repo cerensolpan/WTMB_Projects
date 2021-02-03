@@ -2,7 +2,8 @@
   <div id="app">
     <nav id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/users">Users</router-link>
+      <router-link to="/artist">Artist</router-link> |
+      <router-link to="/genre">Genre</router-link>
     </nav>
     <router-view />
   </div>
@@ -15,10 +16,15 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url("./assets/bp.jpeg");
+  background-position: center;
+  background-size: cover;
 }
 
 #nav {
   padding: 30px;
+  margin: 0;
+  background: black;
 }
 
 #nav a {

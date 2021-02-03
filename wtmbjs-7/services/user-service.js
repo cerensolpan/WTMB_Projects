@@ -8,6 +8,10 @@ class UserService extends BaseService {
         user.playlist.push(song)
         await user.save()
     }
+    async deletePlaylist(user, song) {
+        user.playlist.delete(song)
+        await user.save()
+    }
 }
 
 module.exports = new UserService();
