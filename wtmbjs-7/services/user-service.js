@@ -9,8 +9,13 @@ class UserService extends BaseService {
         await user.save()
     }
     async deletePlaylist(user, song) {
-        user.playlist.delete(song)
-        await user.save()
+        Array.prototype.remove = function (key, value) {
+            const index = this.findIndex((obj) => obj[key] === value);
+            return index >= 0 ? [...this.slice(0, index), ...this.slice(index + 1)] :
+                this;
+        };
+        user.playlist.remove(song)
+        await user.save();
     }
 }
 

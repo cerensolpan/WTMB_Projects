@@ -11,15 +11,18 @@ export default {
     ...mapState(["user", "artists"]),
   },
   methods: {
-    ...mapActions(["fetchArtist", "fetchArtists"]),
+    ...mapActions(["fetchArtist", "fetchArtists", "delSong","fetchUser"]),
   },
   created() {
     this.fetchArtists();
+    if (localStorage.userId) {
+      this.fetchUser(localStorage.userId);
+    }
   },
 };
 </script>
 
-<template lang="pug" >
+<template lang="pug">
 main
   section.title
     h1 Select your songs and add playlist
@@ -29,6 +32,8 @@ main
     section.playlist
       h2 {{ user.name }}'s Playlist
         h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}
+          = ' '
+          button(@click="delSong(song._id)") X
 </template>
 
 <style scoped>

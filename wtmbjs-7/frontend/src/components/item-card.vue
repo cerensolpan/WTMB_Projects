@@ -8,7 +8,7 @@ export default {
     ...mapState([]),
   },
   methods: {
-    ...mapActions(["addSongsToPlaylist"]),
+    ...mapActions(["addSong"]),
   },
 };
 </script>
@@ -19,7 +19,7 @@ article.card
     h2 {{ item.name }}
       h6(v-for="song in item.songs", :song="song", :key="song._id") {{ song.name }}
         = ' '
-        button(@click="addSongsToPlaylist(song._id)") +
+        button(@click="addSong(song._id)") +
   </div>
 </template>
 

@@ -10,15 +10,18 @@ export default {
     ...mapState(["user", "genres"]),
   },
   methods: {
-    ...mapActions(["fetchGenres"]),
+    ...mapActions(["fetchGenres", "fetchUser"]),
   },
   created() {
     this.fetchGenres();
+    if (localStorage.userId) {
+      this.fetchUser(localStorage.userId);
+    }
   },
 };
 </script>
 
-<template lang="pug" >
+<template lang="pug">
 main
   section.title
     h1 Select your songs and add playlist

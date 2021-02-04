@@ -9,9 +9,8 @@ export default new Vuex.Store({
     artists: [],
     artist: {},
     users: [],
-    user: "",
+    user: {},
     genres: [],
-
   },
   mutations: {
     SET_ARTISTS(state, data) {
@@ -28,8 +27,10 @@ export default new Vuex.Store({
     },
     SET_GENRES(state, data) {
       state.genres = data;
-    }
-
+    },
+    DEL_SONG(state, data) {
+      state.user = data;
+    },
   },
 
   actions: {
@@ -56,27 +57,54 @@ export default new Vuex.Store({
 
     async fetchUser({
       commit
-    }, user) {
-      commit("SET_USER", user.user);
-    },
-
-    async addSongsToPlaylist({
-      commit,
-    }, songId) {
-
-      let userId = this.state.user._id;
-      await axios({
-          method: 'post',
-          url: 'http://localhost:3000/user/add-playlist',
-          data: {
-            userId: userId,
-            songId: songId
-          }
-        }).then(res => console.log(res))
-        .catch(err => console.log(err));
+    }, userId) {
+      if (!localStorage.userId || localStorage.userId != userId)
+        localStorage.userId = userId;
       const result = await axios.get(`http://localhost:3000/user/${userId}`);
       commit("SET_USER", result.data);
+    },
 
+    async delUser({
+      commit
+    }, id) {
+      console.log(id);
+      await axios
+        .delete(`http://localhost:3000/user/${id}`)
+        .then((res) => location.reload())
+        .catch((err) => console.log(err));
+    },
+
+    async addSong({
+      commit
+    }, songId) {
+      let userId = this.state.user._id;
+      await axios({
+          method: "post",
+          url: "http://localhost:3000/user/add-playlist",
+          data: {
+            userId: userId,
+            songId: songId,
+          },
+        })
+        .then((res) => location.reload())
+        .catch((err) => console.log(err));
+    },
+
+    async delSong({
+      commit
+    }, songId) {
+      console.log(songId);
+      let userId = this.state.user._id;
+      await axios({
+          method: "post",
+          url: "http://localhost:3000/user/delete-playlist",
+          data: {
+            userId: userId,
+            songId: songId,
+          },
+        })
+        .then((res) => location.reload())
+        .catch((err) => console.log(err));
     },
 
     async fetchGenres({
@@ -85,7 +113,6 @@ export default new Vuex.Store({
       const result = await axios.get(`http://localhost:3000/genre/all`);
       commit("SET_GENRES", result.data);
     },
-
   },
   modules: {},
 });

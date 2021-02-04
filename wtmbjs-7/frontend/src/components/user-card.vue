@@ -3,16 +3,8 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "userCard",
   props: ["user"],
-  computed: {
-    userUrl() {
-      return `/user/${this.user._id}`;
-    },
-    aboutUrl() {
-      return `/about`;
-    },
-  },
   methods: {
-    ...mapActions(["fetchUser"]),
+    ...mapActions(["fetchUser", "delUser"]),
   },
 };
 </script>
@@ -22,8 +14,8 @@ article.card
   img(:src="`https://picsum.photos/300/200?random=${user._id}`", alt="")
   <div class= "userDetail">
     h1 {{ user.name }}
-    button.select-button(@click="fetchUser({ user })") Select
-
+    button.select-button(@click="fetchUser(`${user._id}`)") Select
+    button.delete-button(@click="delUser(`${user._id}`)") Delete
   </div>
 </template>
 
@@ -55,10 +47,26 @@ h1 {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .select-button:hover {
+  background-color: green;
+  color: white;
+}
+
+.delete-button {
+  color: green;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid green;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-button:hover {
   background-color: green;
   color: white;
 }

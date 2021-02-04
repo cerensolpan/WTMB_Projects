@@ -41,6 +41,11 @@ router.delete('/:id', async (req, res) => {
     res.send('ok');
 })
 
+router.delete('/:id/json', async (req, res) => {
+    await UserService.del(req.params.id)
+    res.send('ok');
+})
+
 router.post('/add-playlist', async (req, res) => {
 
     const user = await UserService.find(req.body.userId)
@@ -49,7 +54,7 @@ router.post('/add-playlist', async (req, res) => {
     res.send('ok');
 })
 
-router.delete('/delete-playlist', async (req, res) => {
+router.post('/delete-playlist', async (req, res) => {
 
     const user = await UserService.find(req.body.userId)
     const song = await SongService.find(req.body.songId)

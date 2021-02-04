@@ -15,15 +15,18 @@ export default {
     ...mapActions(["fetchUser", "fetchUsers"]),
   },
   created() {
-    this.fetchUsers();
+    this.fetchUsers()
+    if (localStorage.userId) {
+      this.fetchUser(localStorage.userId);
+    }
   },
 };
-</script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+</script>
 
 <template lang="pug">
 main.bg
   section
-    h1 Please select user and go to to create playlist
+    h1 Please select user and go to create playlist
     h1 Selected User: {{ user.name }}
   section.cards
     user-card(v-for="user in users", :user="user")
@@ -58,6 +61,3 @@ section {
   color: white;
 }
 </style>
-
-
-
