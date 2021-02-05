@@ -1,21 +1,23 @@
 <script>
 // @ is an alias to /src
 import UserCard from "@/components/user-card.vue";
+import NewUser from "@/components/new-user.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
     UserCard,
+    NewUser,
   },
   computed: {
     ...mapState(["user", "users"]),
   },
   methods: {
-    ...mapActions(["fetchUser", "fetchUsers"]),
+    ...mapActions(["fetchUser", "fetchUsers", "addUser"]),
   },
   created() {
-    this.fetchUsers()
+    this.fetchUsers();
     if (localStorage.userId) {
       this.fetchUser(localStorage.userId);
     }
@@ -24,17 +26,19 @@ export default {
 </script>
 
 <template lang="pug">
-main.bg
+main
   section
-    h1 Please select user and go to create playlist
+    h1 Please create a new user or select a user, then go to create playlist
     h1 Selected User: {{ user.name }}
+  section.new
+    new-user
   section.cards
     user-card(v-for="user in users", :user="user")
 </template>
 
 <style scoped>
 section {
-  padding: 40px 0;
+  padding: 10px 0;
 }
 
 .cards {

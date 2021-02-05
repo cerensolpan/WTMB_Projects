@@ -10,7 +10,7 @@ export default {
     ...mapState(["user", "genres"]),
   },
   methods: {
-    ...mapActions(["fetchGenres", "fetchUser"]),
+    ...mapActions(["fetchGenres", "fetchUser", "delSong"]),
   },
   created() {
     this.fetchGenres();
@@ -31,6 +31,8 @@ main
     section.playlist
       h2 {{ user.name }}'s Playlist
         h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}
+          = ' '
+          button(@click="delSong(song._id)") X
 </template>
 
 <style scoped>

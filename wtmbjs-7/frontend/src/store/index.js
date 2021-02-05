@@ -28,6 +28,9 @@ export default new Vuex.Store({
     SET_GENRES(state, data) {
       state.genres = data;
     },
+    SET_NEWUSER(state, data) {
+      state.users.unshift(data);
+    },
     DEL_SONG(state, data) {
       state.user = data;
     },
@@ -72,6 +75,15 @@ export default new Vuex.Store({
         .delete(`http://localhost:3000/user/${id}`)
         .then((res) => location.reload())
         .catch((err) => console.log(err));
+    },
+
+    async addUser({
+      commit
+    }, user) {
+      await axios.post('http://localhost:3000/user', user)
+        .then(res => commit("SET_NEWUSER", res.data))
+        .catch((err) => console.log(err));
+
     },
 
     async addSong({
