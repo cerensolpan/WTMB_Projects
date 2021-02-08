@@ -1,10 +1,17 @@
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "ArtistCard",
   props: ["artist"],
+  components: {},
   computed: {
-    artistUrl() {
-      return `/artist/${this.artist._id}`;
+    ...mapState(["song"]),
+  },
+  methods: {
+    ...mapActions(["addSong", "release", "fetchArtist"]),
+    openNewTab: function () {
+      window.open("http://localhost:8080/artist/release", "_blank");
     },
   },
 };
@@ -12,20 +19,42 @@ export default {
 
 <template lang="pug">
 article.card
-  img(:src="`https://picsum.photos/300/200?random=${artist._id}`", alt="")
-  h2.card-title 
-    router-link(:to="artistUrl") {{ artist.name }}
-  p {{ artist.songs }}
+  <div class= "artistDetail">
+    h2 {{ artist.name }}
+      = ' '
+      button.release(@click="fetchArtist(`${artist._id}`) + openNewTab()") Release Song
+      h6(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
+        = ' '
+        button(@click="addSong(song._id)") +
+  </div>
 </template>
 
 <style scoped>
 .card {
-  display: inline-block;
-  text-align: left;
-  padding: 20px;
-  border: 1px solid grey;
-  border-radius: 3px;
-  margin: 20px;
-  min-width: 200px;
+  display: flex;
+  width: 400px;
+  margin: 0px auto;
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border: 2px solid grey;
+  border-radius: 20px;
+}
+
+.release {
+  color: green;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid green;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.release:hover {
+  background-color: green;
+  color: white;
 }
 </style>

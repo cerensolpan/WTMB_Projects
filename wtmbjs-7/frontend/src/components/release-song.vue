@@ -1,22 +1,52 @@
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "newUser",
+  name: "ReleaseSong",
+  computed: {
+    ...mapState(["genres", "artist"]),
+  },
   data() {
     return {
-      user: "",
+      song: "",
+      genre: {},
       clicked: false,
     };
   },
   methods: {
-    ...mapActions(["addUser"]),
+    ...mapActions(["releaseSong", "fetchGenres", "fetchArtist"]),
     onSubmit() {
-      let newUser = {
-        name: this.user,
+      let newSong = {
+        name: this.song,
+        artistId: this.artist._id,
+        genreId: this.genre,
       };
-      this.addUser(newUser);
-      this.user = "";
+      this.releaseSong(newSong);
+      console.log(newSong);
+
+      // if (this.song && this.artist && this.genre) {
+      //   return true;
+      // }
+
+      // this.errors = [];
+
+      // if (!this.song) {
+      //   this.errors.push("Song required.");
+      // }
+      // if (!this.artist) {
+      //   this.errors.push("Artist required.");
+      // }
+      // if (!this.genre) {
+      //   this.errors.push("Genre required.");
+      // }
+
+      // e.preventDefault();
     },
+  },
+  created() {
+    this.fetchGenres();
+    if (localStorage.artistId) {
+      this.fetchArtist(localStorage.artistId);
+    }
   },
 };
 </script>
@@ -24,14 +54,16 @@ export default {
 <template lang="pug">
 article.container
   form(@submit.prevent="onSubmit")
-    h3.title Add a new user
-    input(type="text", v-model="user", placeholder="Type in your username")
+    h3.title {{ artist.name }} Release Song
+    input(type="text", v-model="song", placeholder="Type in song") 
+    select(v-model="genre")
+      option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
     input.button(
       type="submit",
       value="Submit",
       @click="() => (clicked = true)"
     )
-  h3.add(v-if="clicked") This user is added.
+  h3.add(v-if="clicked") This song is released.
 </template>
 
 <style scoped>
@@ -41,14 +73,21 @@ form {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
+  padding: 40px;
   border: 1px solid grey;
   border-radius: 3px;
-  margin: 0px;
+  margin: 20px;
   width: 250px;
   height: 150px;
 }
 input[type="text"] {
+  flex: 8;
+  padding: 10px;
+  border: 1px solid #a38b00;
+  outline: 0;
+  margin: 10px auto;
+}
+select {
   flex: 8;
   padding: 10px;
   border: 1px solid #a38b00;

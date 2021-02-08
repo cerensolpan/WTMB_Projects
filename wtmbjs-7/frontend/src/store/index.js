@@ -11,6 +11,10 @@ export default new Vuex.Store({
     users: [],
     user: {},
     genres: [],
+    genre: {},
+    newSong: '',
+    newArtist: '',
+    newGenre: '',
   },
   mutations: {
     SET_ARTISTS(state, data) {
@@ -28,12 +32,19 @@ export default new Vuex.Store({
     SET_GENRES(state, data) {
       state.genres = data;
     },
+    SET_GENRE(state, data) {
+      state.genre = data;
+    },
     SET_NEWUSER(state, data) {
       state.users.unshift(data);
     },
-    DEL_SONG(state, data) {
-      state.user = data;
+    SET_NEWARTIST(state, data) {
+      state.artists.unshift(data);
     },
+    SET_NEWGENRE(state, data) {
+      state.genres.unshift(data);
+    },
+
   },
 
   actions: {
@@ -46,8 +57,10 @@ export default new Vuex.Store({
 
     async fetchArtist({
       commit
-    }, id) {
-      const result = await axios.get(`http://localhost:3000/artist/${id}/json`);
+    }, artistId) {
+      if (!localStorage.artistId || localStorage.artistId != artistId)
+        localStorage.artistId = artistId;
+      const result = await axios.get(`http://localhost:3000/artist/${artistId}/json`);
       commit("SET_ARTIST", result.data);
     },
 
@@ -83,7 +96,21 @@ export default new Vuex.Store({
       await axios.post('http://localhost:3000/user', user)
         .then(res => commit("SET_NEWUSER", res.data))
         .catch((err) => console.log(err));
+    },
+    async addArtist({
+      commit
+    }, artist) {
+      await axios.post('http://localhost:3000/artist', artist)
+        .then(res => commit("SET_NEWARTIST", res.data))
+        .catch((err) => console.log(err));
+    },
 
+    async addGenre({
+      commit
+    }, genre) {
+      await axios.post('http://localhost:3000/genre', genre)
+        .then(res => commit("SET_NEWGENRE", res.data))
+        .catch((err) => console.log(err));
     },
 
     async addSong({
@@ -119,11 +146,37 @@ export default new Vuex.Store({
         .catch((err) => console.log(err));
     },
 
+    async releaseSong({
+      commit
+    }, newSong) {
+      let artistId = this.state.artist._id;
+      let genreId = this.state.genre._id;
+      await axios({
+          method: "post",
+          url: "http://localhost:3000/artist/release",
+          data: {
+            name: newSong.name,
+            artistId: newSong.artistId,
+            genreId: newSong.genreId,
+
+          },
+        })
+        .then((res) => location.reload())
+        .catch((err) => console.log(err));
+    },
+
     async fetchGenres({
       commit
     }, id) {
       const result = await axios.get(`http://localhost:3000/genre/all`);
       commit("SET_GENRES", result.data);
+    },
+
+    async fetchGenre({
+      commit
+    }, id) {
+      const result = await axios.get(`http://localhost:3000/genre/${id}`);
+      commit("SET_GENRE", result.data);
     },
   },
   modules: {},

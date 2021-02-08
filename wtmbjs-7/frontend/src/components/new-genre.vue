@@ -1,21 +1,21 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  name: "newUser",
+  name: "newGenre",
   data() {
     return {
-      user: "",
+      genre: "",
       clicked: false,
     };
   },
   methods: {
-    ...mapActions(["addUser"]),
+    ...mapActions(["addGenre"]),
     onSubmit() {
-      let newUser = {
-        name: this.user,
+      let newGenre = {
+        name: this.genre,
       };
-      this.addUser(newUser);
-      this.user = "";
+      this.addGenre(newGenre);
+      this.genre = "";
     },
   },
 };
@@ -24,14 +24,14 @@ export default {
 <template lang="pug">
 article.container
   form(@submit.prevent="onSubmit")
-    h3.title Add a new user
-    input(type="text", v-model="user", placeholder="Type in your username")
+    h3.title Add a new genre
+    input(type="text", v-model="genre", placeholder="Type in genre name")
     input.button(
       type="submit",
       value="Submit",
       @click="() => (clicked = true)"
     )
-  h3.add(v-if="clicked") This user is added.
+  h3.add(v-if="clicked") This genre is added.
 </template>
 
 <style scoped>

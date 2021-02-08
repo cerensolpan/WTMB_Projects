@@ -1,8 +1,8 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
-  name: "ItemCard",
-  props: ["item"],
+  name: "GenreCard",
+  props: ["genre"],
   components: {},
   computed: {
     ...mapState([]),
@@ -15,10 +15,9 @@ export default {
 
 <template lang="pug">
 article.card
-  <div class= "itemDetail">
-    h2 {{ item.name }}
-      button Release Song
-      h6(v-for="song in item.songs", :song="song", :key="song._id") {{ song.name }}
+  <div class= "genreDetail">
+    h2 {{ genre.name }}
+      h6(v-for="song in genre.songs", :song="song", :key="song._id") {{ song.name }}
         = ' '
         button(@click="addSong(song._id)") +
   </div>
@@ -28,7 +27,7 @@ article.card
 .card {
   display: flex;
   width: 400px;
-  margin: 100px auto;
+  margin: 0px auto;
   background: white;
   padding: 40px;
   text-align: center;

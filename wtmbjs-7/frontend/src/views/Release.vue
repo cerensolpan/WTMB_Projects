@@ -1,43 +1,25 @@
 <script>
 import { mapState, mapActions } from "vuex";
-import GenreCard from "@/components/genre-card.vue";
-import NewGenre from "@/components/new-genre.vue";
+import ReleaseSong from "@/components/release-song.vue";
 
 export default {
-  name: "Genre",
+  name: "Release",
   components: {
-    GenreCard,
-    NewGenre,
+    ReleaseSong,
   },
   computed: {
-    ...mapState(["user", "genres"]),
+    ...mapState([]),
   },
   methods: {
-    ...mapActions(["fetchGenres", "fetchUser", "delSong"]),
-  },
-  created() {
-    this.fetchGenres();
-    if (localStorage.userId) {
-      this.fetchUser(localStorage.userId);
-    }
+    ...mapActions([]),
   },
 };
 </script>
 
 <template lang="pug">
 main
-  section.title
-    h1 Select your songs and add playlist
-  section.new
-    new-genre
-  section.cards
-    section.card
-      genre-card(v-for="genre in genres", :genre="genre", :key="genre._id")
-    section.playlist
-      h2.userTitle {{ user.name }}'s Playlist
-        h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}
-          = ' '
-          button(@click="delSong(song._id)") X
+  section.card
+    release-song
 </template>
 
 <style scoped>
@@ -71,7 +53,7 @@ main {
 
 .playlist {
   width: 400px;
-  margin: 0px 20px;
+  margin: 100px 20px;
   background: white;
   padding: 40px;
   text-align: center;
