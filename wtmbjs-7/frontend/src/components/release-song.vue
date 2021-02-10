@@ -9,44 +9,42 @@ export default {
     return {
       song: "",
       genre: {},
+      errors: {},
       clicked: false,
     };
   },
   methods: {
-    ...mapActions(["releaseSong", "fetchGenres", "fetchArtist"]),
-    onSubmit() {
+    ...mapActions(["releaseSong", "fetchGenres"]),
+    onSubmit(e) {
+      e.preventDefault();
       let newSong = {
         name: this.song,
         artistId: this.artist._id,
         genreId: this.genre,
       };
-      this.releaseSong(newSong);
-      console.log(newSong);
-
-      // if (this.song && this.artist && this.genre) {
-      //   return true;
-      // }
-
-      // this.errors = [];
-
-      // if (!this.song) {
-      //   this.errors.push("Song required.");
-      // }
-      // if (!this.artist) {
-      //   this.errors.push("Artist required.");
-      // }
-      // if (!this.genre) {
-      //   this.errors.push("Genre required.");
-      // }
-
-      // e.preventDefault();
+      this.errors = {};
+      if (this.song == "") {
+        this.errors.song = "Song required.";
+      }
+      if (!this.artist) {
+        this.errors.artist = "Artist required.";
+      }
+      if (!this.genre) {
+        this.errors.genre = "Genre required.";
+      }
+      if (JSON.stringify(this.errors) === "{}") {
+        this.releaseSong(newSong);
+        this.clicked = true;
+        this.song = "";
+        this.genre = {};
+        this.errors = {};
+      } else {
+        this.clicked = false;
+      }
     },
   },
   created() {
     this.fetchGenres();
-    if (localStorage.artistId) {
-      this.fetchArtist(localStorage.artistId);
-    }
   },
 };
 </script>
@@ -58,12 +56,9 @@ article.container
     input(type="text", v-model="song", placeholder="Type in song") 
     select(v-model="genre")
       option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
-    input.button(
-      type="submit",
-      value="Submit",
-      @click="() => (clicked = true)"
-    )
+    input.button(type="submit", value="Submit")
   h3.add(v-if="clicked") This song is released.
+  h3.add(v-if="JSON.stringify(this.errors) != '{}'") {{ errors }}
 </template>
 
 <style scoped>
@@ -130,5 +125,6 @@ input[type="submit"] {
 .add {
   text-align: center;
   font-size: 15px;
+  color: red;
 }
 </style>

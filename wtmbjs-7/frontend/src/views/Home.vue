@@ -14,7 +14,7 @@ export default {
     ...mapState(["user", "users"]),
   },
   methods: {
-    ...mapActions(["fetchUser", "fetchUsers", "addUser"]),
+    ...mapActions(["fetchUser", "fetchUsers", "addUser", "logOut"]),
   },
   created() {
     this.fetchUsers();
@@ -29,7 +29,10 @@ export default {
 main
   section
     h1 Please create a new user or select a user, then go to create playlist
-    h1 Selected User: {{ user.name }}
+
+    h3(v-if="JSON.stringify(user) != '{}'") Selected User: {{ user.name }}
+    h3(v-else) Please select a user
+    button(@click="logOut") Remove the selected user
   section.new
     new-user
   section.cards
@@ -49,7 +52,7 @@ section {
   flex-wrap: wrap;
 }
 .select-button {
-  color: green;
+  color: #abd7ed;
   padding: 10px 20px;
   border-radius: 8px;
   background-color: white;
@@ -61,7 +64,7 @@ section {
 }
 
 .select-button:hover {
-  background-color: green;
+  background-color: #abd7ed;
   color: white;
 }
 </style>

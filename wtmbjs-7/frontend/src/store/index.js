@@ -66,7 +66,7 @@ export default new Vuex.Store({
 
     async fetchUsers({
       commit
-    }, id) {
+    }) {
       const result = await axios.get(`http://localhost:3000/user/all`);
       commit("SET_USERS", result.data);
     },
@@ -81,12 +81,13 @@ export default new Vuex.Store({
     },
 
     async delUser({
-      commit
+      commit,
+      dispatch
     }, id) {
       console.log(id);
       await axios
         .delete(`http://localhost:3000/user/${id}`)
-        .then((res) => location.reload())
+        .then(() => dispatch('fetchUsers'))
         .catch((err) => console.log(err));
     },
 
@@ -130,7 +131,8 @@ export default new Vuex.Store({
     },
 
     async delSong({
-      commit
+      commit,
+      dispatch
     }, songId) {
       console.log(songId);
       let userId = this.state.user._id;
@@ -142,15 +144,11 @@ export default new Vuex.Store({
             songId: songId,
           },
         })
-        .then((res) => location.reload())
+        .then((res) => dispatch('fetchUser', userId))
         .catch((err) => console.log(err));
     },
 
-    async releaseSong({
-      commit
-    }, newSong) {
-      let artistId = this.state.artist._id;
-      let genreId = this.state.genre._id;
+    async releaseSong(newSong) {
       await axios({
           method: "post",
           url: "http://localhost:3000/artist/release",
@@ -161,7 +159,7 @@ export default new Vuex.Store({
 
           },
         })
-        .then((res) => location.reload())
+        .then(() => console.log('ok'))
         .catch((err) => console.log(err));
     },
 
@@ -178,6 +176,14 @@ export default new Vuex.Store({
       const result = await axios.get(`http://localhost:3000/genre/${id}`);
       commit("SET_GENRE", result.data);
     },
+
+    async logOut({
+      commit
+    }) {
+      let data = {};
+      localStorage.userId = null;
+      commit("SET_USER", data);
+    }
   },
   modules: {},
 });

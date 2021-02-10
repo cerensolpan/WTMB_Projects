@@ -22,7 +22,8 @@ article.card
   <div class= "artistDetail">
     h2 {{ artist.name }}
       = ' '
-      button.release(@click="fetchArtist(`${artist._id}`) + openNewTab()") Release Song
+      button.release(@click="fetchArtist(`${artist._id}`)")
+        router-link(:to="{ path: 'artist/release' }") Release Song
       h6(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
         = ' '
         button(@click="addSong(song._id)") +
@@ -34,7 +35,7 @@ article.card
   display: flex;
   width: 400px;
   margin: 0px auto;
-  background: white;
+  background: #abd7ed;
   padding: 40px;
   text-align: center;
   border: 2px solid grey;
