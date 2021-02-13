@@ -2,18 +2,20 @@
 import { mapState, mapActions } from "vuex";
 import ArtistCard from "@/components/artist-card.vue";
 import NewArtist from "@/components/new-artist.vue";
+import PlaylistCard from "@/components/playlist-card.vue";
 
 export default {
   name: "Artist",
   components: {
     ArtistCard,
     NewArtist,
+    PlaylistCard,
   },
   computed: {
-    ...mapState(["user", "artists", "artist"]),
+    ...mapState(["artists", "artist"]),
   },
   methods: {
-    ...mapActions(["fetchArtist", "fetchArtists", "delSong", "fetchUser"]),
+    ...mapActions(["fetchArtist", "fetchArtists", "fetchUser"]),
   },
   created() {
     this.fetchArtists();
@@ -27,26 +29,22 @@ export default {
 <template lang="pug">
 main
   section.title
-    h1 Select your songs and add playlist
+    span Select your songs and add playlist
   section.new
     new-artist
-  section.cards
-    section.card
+  section.cards.full
+    section.card.half
       artist-card(
         v-for="artist in artists",
         :artist="artist",
         :key="artist._id"
       )
-    section.playlist
-      h2.userTitle {{ user.name }}'s Playlist
-        h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}
-          = ' '
-          button(@click="delSong(song._id)") X
+    section.playlist.half
+      playlist-card
 </template>
 
 <style scoped>
 main {
-  font-family: "Indie Flower", cursive;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -61,30 +59,9 @@ main {
   margin: 20px;
 }
 
-.userTitle {
-  position: -webkit-sticky; /* Safari & IE */
-  position: sticky;
-  top: 40px;
-}
-
 .cards {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.playlist {
-  width: 400px;
-  margin: 0px 20px;
-  background: white;
-  padding: 40px;
-  text-align: center;
-  border: 2px solid grey;
-  border-radius: 20px;
-}
-h4 {
   display: flex;
   flex-direction: row;
-  text-align: center;
+  flex-wrap: wrap;
 }
 </style>

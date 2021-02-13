@@ -35,9 +35,18 @@ article.container
 </template>
 
 <style scoped>
+.container {
+  display: inline-block;
+  text-align: left;
+  padding: 10px;
+  border-radius: 3px;
+  min-width: 200px;
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -45,8 +54,6 @@ form {
   border: 1px solid grey;
   border-radius: 3px;
   margin: 0px;
-  width: 250px;
-  height: 150px;
 }
 input[type="text"] {
   flex: 8;
@@ -55,24 +62,23 @@ input[type="text"] {
   outline: 0;
   margin: 10px auto;
 }
+
 input[type="submit"] {
-  color: green;
+  color: #8783d1;
   padding: 10px 20px;
   border-radius: 8px;
   background-color: white;
-  border: 1px solid green;
+  border: 1px solid #8783d1;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
-.container {
-  display: inline-block;
-  text-align: left;
-  padding: 20px;
-  border-radius: 3px;
-  margin: 20px;
-  min-width: 200px;
+
+input[type="submit"]:hover {
+  background-color: #8783d1;
+  color: white;
 }
+
 .title {
   margin: 0 auto;
   width: 200px;
@@ -88,6 +94,7 @@ input[type="submit"] {
 .title:hover {
   color: cornflowerblue;
 }
+
 .add {
   text-align: center;
   font-size: 15px;

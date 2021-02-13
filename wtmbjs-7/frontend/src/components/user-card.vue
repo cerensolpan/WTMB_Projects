@@ -26,6 +26,7 @@ img {
   border-radius: 50%;
   margin-right: 20px;
 }
+
 .userDetail {
   display: flex;
   flex-direction: column;
@@ -38,38 +39,7 @@ img {
 h1 {
   margin: 0;
 }
-.select-button {
-  color: green;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid green;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 5px;
-}
 
-.select-button:hover {
-  background-color: green;
-  color: white;
-}
-
-.delete-button {
-  color: green;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid green;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: green;
-  color: white;
-}
 .card {
   display: flex;
   flex-wrap: wrap;
@@ -80,7 +50,22 @@ h1 {
   border: 1px solid grey;
   border-radius: 3px;
   margin: 20px;
-  width: 200px;
-  height: 100px;
+}
+
+button {
+  color: #8783d1;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #8783d1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 2px;
+}
+
+button:hover {
+  background-color: #8783d1;
+  color: white;
 }
 </style>

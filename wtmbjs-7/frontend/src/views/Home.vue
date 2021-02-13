@@ -28,11 +28,10 @@ export default {
 <template lang="pug">
 main
   section
-    h1 Please create a new user or select a user, then go to create playlist
-
-    h3(v-if="JSON.stringify(user) != '{}'") Selected User: {{ user.name }}
+    span Please create a new user or select a user, then go to Artist and Genre page for creating a playlist
+    h3.selected(v-if="JSON.stringify(user) != '{}'") Selected User: {{ user.name }}
+      button(@click="logOut") Remove the selected user
     h3(v-else) Please select a user
-    button(@click="logOut") Remove the selected user
   section.new
     new-user
   section.cards
@@ -42,6 +41,15 @@ main
 <style scoped>
 section {
   padding: 10px 0;
+  margin-top: 20px;
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .cards {
@@ -51,20 +59,21 @@ section {
   align-items: center;
   flex-wrap: wrap;
 }
-.select-button {
-  color: #abd7ed;
+
+button {
+  color: #8783d1;
   padding: 10px 20px;
   border-radius: 8px;
   background-color: white;
-  border: 1px solid green;
+  border: 1px solid #8783d1;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
-.select-button:hover {
-  background-color: #abd7ed;
+button:hover {
+  background-color: #8783d1;
   color: white;
 }
 </style>

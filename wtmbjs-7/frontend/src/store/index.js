@@ -115,7 +115,8 @@ export default new Vuex.Store({
     },
 
     async addSong({
-      commit
+      commit,
+      dispatch
     }, songId) {
       let userId = this.state.user._id;
       await axios({
@@ -126,7 +127,7 @@ export default new Vuex.Store({
             songId: songId,
           },
         })
-        .then((res) => location.reload())
+        .then((res) => dispatch('fetchUser', userId))
         .catch((err) => console.log(err));
     },
 
@@ -148,7 +149,10 @@ export default new Vuex.Store({
         .catch((err) => console.log(err));
     },
 
-    async releaseSong(newSong) {
+    async releaseSong({
+      commit
+    }, newSong) {
+      console.log(newSong);
       await axios({
           method: "post",
           url: "http://localhost:3000/artist/release",
@@ -156,7 +160,6 @@ export default new Vuex.Store({
             name: newSong.name,
             artistId: newSong.artistId,
             genreId: newSong.genreId,
-
           },
         })
         .then(() => console.log('ok'))

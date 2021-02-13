@@ -22,17 +22,19 @@ export default {
         artistId: this.artist._id,
         genreId: this.genre,
       };
+      console.log(newSong);
       this.errors = {};
       if (this.song == "") {
         this.errors.song = "Song required.";
       }
-      if (!this.artist) {
-        this.errors.artist = "Artist required.";
-      }
+      // if (!this.artist) {
+      //   this.errors.artist = "Artist required.";
+      // }
       if (!this.genre) {
         this.errors.genre = "Genre required.";
       }
       if (JSON.stringify(this.errors) === "{}") {
+        console.log('girdi');
         this.releaseSong(newSong);
         this.clicked = true;
         this.song = "";
@@ -87,19 +89,26 @@ select {
   padding: 10px;
   border: 1px solid #a38b00;
   outline: 0;
-  margin: 10px auto;
+  margin-right: 10px;
 }
+
 input[type="submit"] {
-  color: green;
+  color: #8783d1;
   padding: 10px 20px;
   border-radius: 8px;
   background-color: white;
-  border: 1px solid green;
+  border: 1px solid #8783d1;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
+
+input[type="submit"]:hover {
+  background-color: #8783d1;
+  color: white;
+}
 .container {
+  font-family: "Roboto", sans-serif;
   display: inline-block;
   text-align: left;
   padding: 20px;
@@ -125,6 +134,6 @@ input[type="submit"] {
 .add {
   text-align: center;
   font-size: 15px;
-  color: red;
+  color: #8783d1;
 }
 </style>

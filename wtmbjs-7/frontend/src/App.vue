@@ -11,20 +11,19 @@
 
 <style>
 #app {
-  font-family: "Chakra Petch", sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url("./assets/bp.jpeg");
-  background-position: center;
-  background-size: cover;
+  background: #e9d8d9;
 }
 
 #nav {
   padding: 30px;
   margin: 0;
-  background: black;
+  background: #bfa4a4;
+  font-size: 18px;
 }
 
 #nav a {
@@ -33,6 +32,6 @@
 }
 
 #nav a.router-link-exact-active {
-  color: cornflowerblue;
+  color: #5f4444;
 }
 </style>

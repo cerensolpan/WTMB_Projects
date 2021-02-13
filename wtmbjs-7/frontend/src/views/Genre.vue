@@ -2,18 +2,20 @@
 import { mapState, mapActions } from "vuex";
 import GenreCard from "@/components/genre-card.vue";
 import NewGenre from "@/components/new-genre.vue";
+import PlaylistCard from "@/components/playlist-card.vue";
 
 export default {
   name: "Genre",
   components: {
     GenreCard,
     NewGenre,
+    PlaylistCard,
   },
   computed: {
-    ...mapState(["user", "genres"]),
+    ...mapState(["genres"]),
   },
   methods: {
-    ...mapActions(["fetchGenres", "fetchUser", "delSong"]),
+    ...mapActions(["fetchGenres", "fetchUser"]),
   },
   created() {
     this.fetchGenres();
@@ -27,22 +29,18 @@ export default {
 <template lang="pug">
 main
   section.title
-    h1 Select your songs and add playlist
+    span Select your songs and add playlist
   section.new
     new-genre
   section.cards
     section.card
       genre-card(v-for="genre in genres", :genre="genre", :key="genre._id")
     section.playlist
-      h2.userTitle {{ user.name }}'s Playlist
-        h5(v-for="song in user.playlist", :key="song.name") {{ song.name }}
-          = ' '
-          button(@click="delSong(song._id)") X
+      playlist-card
 </template>
 
 <style scoped>
 main {
-  font-family: "Indie Flower", cursive;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -57,30 +55,9 @@ main {
   margin: 20px;
 }
 
-.userTitle {
-  position: -webkit-sticky; /* Safari & IE */
-  position: sticky;
-  top: 40px;
-}
-
 .cards {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.playlist {
-  width: 400px;
-  margin: 0px 20px;
-  background: white;
-  padding: 40px;
-  text-align: center;
-  border: 2px solid grey;
-  border-radius: 20px;
-}
-h4 {
   display: flex;
   flex-direction: row;
-  text-align: center;
+  flex-wrap: wrap;
 }
 </style>
