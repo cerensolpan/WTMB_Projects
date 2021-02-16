@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 The number of the songs #{songs.length}
+    each  song in songs
+        h4 id: #{song.id}
+        h4 Song Name: #{song.name}
+    

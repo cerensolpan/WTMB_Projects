@@ -16,3 +16,9 @@
 /wtmbjs-7/package-lock.json
 /wtmbjs-7/.env
 /wtmbjs-7/.nyc_output
+/wtmbjs-8/backend/node_modules/
+/wtmbjs-8/frontend/node_modules/
+/wtmbjs-8/backend/package-lock.json
+/wtmbjs-8/frontend/package-lock.json
+/wtmbjs-8/backend/.env
+/wtmbjs-8/docker-compose.yml
