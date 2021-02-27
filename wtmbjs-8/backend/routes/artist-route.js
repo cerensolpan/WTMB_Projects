@@ -14,51 +14,75 @@ const Song = require('../models/song-model');
 
 //Get artists from the artist-database.json
 router.get('/all', async (req, res) => {
-    const artists = await ArtistService.findAll();
-    res.send(artists)
-})
-
-router.get('/all/json', async (req, res) => {
-    const artists = await ArtistService.findAll();
-    res.send(artists)
+    try {
+        const artists = await ArtistService.findAll();
+        res.send(artists)
+    } catch (err) {
+        res.status(404);
+        res.send({
+            error: "Artists get operation is failed" + err,
+        });
+    }
 })
 
 // Get artists from the artist-database.json
 router.get("/:id", async (req, res) => {
-    const artist = await ArtistService.find(req.params.id);
-    if (!artist) res.status(404);
-    res.send(artist);
-})
-
-router.get("/:id/json", async (req, res) => {
-    const artist = await ArtistService.find(req.params.id);
-    res.send(artist);
+    try {
+        const artist = await ArtistService.find(req.params.id);
+        if (!artist) res.status(404);
+        res.send(artist);
+    } catch (err) {
+        res.status(404);
+        res.send({
+            error: "Artist get operation is failed" + err,
+        });
+    }
 })
 
 // Add new artist using the console to database (axios.post('/artist', { name: 'x'}).then(console.log))
 router.post('/', async (req, res) => {
-    const artist = await ArtistService.add(req.body)
-    res.send(artist);
+    try {
+        const artist = await ArtistService.add(req.body)
+        res.send(artist);
+    } catch (err) {
+        res.status(404);
+        res.send({
+            error: "Artist post operation is failed" + err,
+        });
+    }
 })
 
 // Delete artist using the console to database (axios.delete('/artist/3').then(console.log))
 router.delete('/:id', async (req, res) => {
-    await ArtistService.del(req.params.id)
-    res.send('ok');
+    try {
+        await ArtistService.del(req.params.id)
+        res.send('ok');
+    } catch (err) {
+        res.status(404);
+        res.send({
+            error: "Artist delete operation is failed" + err,
+        });
+    }
 })
 
 router.post("/release", async (req, res) => {
-
-    const artist = await ArtistService.find(req.body.artistId)
-    const genre = await GenreService.find(req.body.genreId)
-    const newSong = new Song({
-        name: req.body.name,
-        artist: artist,
-        genre: genre
-    })
-    const song = await SongService.add(newSong)
-    await ArtistService.release(artist, genre, song);
-    res.send('song released');
+    try {
+        const artist = await ArtistService.find(req.body.artistId)
+        const genre = await GenreService.find(req.body.genreId)
+        const newSong = new Song({
+            name: req.body.name,
+            artist: artist,
+            genre: genre
+        })
+        const song = await SongService.add(newSong)
+        await ArtistService.release(artist, genre, song);
+        res.send('song released');
+    } catch (err) {
+        res.status(404);
+        res.send({
+            error: "Release is failed" + err,
+        });
+    }
 })
 
 module.exports = router
