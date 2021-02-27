@@ -11,7 +11,8 @@ export default {
   methods: {
     ...mapActions(["addSong", "release", "fetchArtist"]),
     openNewTab: function () {
-      window.open("http://localhost:8080/artist/release", "_blank");
+      const path=window.location.href+"/release";
+      window.open(path, "_blank");
     },
   },
 };
