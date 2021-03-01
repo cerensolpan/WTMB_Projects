@@ -1,10 +1,11 @@
 <script>
 import { mapState, mapActions } from "vuex";
+import Button from "./button.vue";
 
 export default {
   name: "ArtistCard",
   props: ["artist"],
-  components: {},
+  components: {Button},
   computed: {
     ...mapState(["song"]),
   },
@@ -22,12 +23,11 @@ export default {
 article.card
   <div class= "artistDetail">
     h2 {{ artist.name }}
-      = ' '
-    button.release(@click="fetchArtist(`${artist._id}`)")
+    button.release(@click="fetchArtist(artist._id)")
       router-link.link(:to="{ path: 'artist/release' }") Release Song
     span.songs(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
-      = ' '
-      button(@click="addSong(song._id)") +
+      span(@click="addSong(song._id)")
+        Button
   </div>
 </template>
 
@@ -46,7 +46,7 @@ article.card
   word-break: break-word;
 }
 
-button {
+/* button {
   color: #8783d1;
   padding: 10px 20px;
   border-radius: 8px;
@@ -61,7 +61,7 @@ button {
 button:hover {
   background-color: #8783d1;
   color: white;
-}
+} */
 
 .songs {
   margin-left: 15px;

@@ -7,12 +7,6 @@ export default {
   components: {
     ReleaseSong,
   },
-  computed: {
-    ...mapState([]),
-  },
-  methods: {
-    ...mapActions([]),
-  },
 };
 </script>
 

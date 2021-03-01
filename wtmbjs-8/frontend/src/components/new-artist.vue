@@ -94,6 +94,7 @@ input[type="submit"]:hover {
 .title:hover {
   color: cornflowerblue;
 }
+
 .add {
   text-align: center;
   font-size: 15px;

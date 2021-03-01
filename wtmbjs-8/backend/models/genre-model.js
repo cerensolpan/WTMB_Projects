@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const GenreSchema = new mongoose.Schema({
     name: {
         type: String,
-        //default: "genre",
         required: true
     },
     songs: [{
