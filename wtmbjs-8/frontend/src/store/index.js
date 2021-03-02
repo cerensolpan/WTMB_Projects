@@ -60,7 +60,7 @@ export default new Vuex.Store({
     }, artistId) {
       if (!localStorage.artistId || localStorage.artistId != artistId)
         localStorage.artistId = artistId;
-      const result = await axios.get(`${process.env.VUE_APP_API_URL}/artist/${artistId}/json`);
+      const result = await axios.get(`${process.env.VUE_APP_API_URL}/artist/${artistId}`);
       commit("SET_ARTIST", result.data);
     },
 
@@ -152,7 +152,6 @@ export default new Vuex.Store({
     async releaseSong({
       commit
     }, newSong) {
-      console.log(newSong);
       await axios({
           method: "post",
           url: `${process.env.VUE_APP_API_URL}/artist/release`,

@@ -5,10 +5,10 @@ export default {
   name: "PlaylistCard",
   components: {},
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user","artists"]),
   },
   methods: {
-    ...mapActions(["delSong"]),
+    ...mapActions(["delSong","fetchArtists"]),
   },
 };
 </script>
@@ -17,9 +17,8 @@ export default {
 article
   section.playlist
     h2.userTitle {{ user.name }}'s Playlist
-    li.playlist-songs(v-for="song in user.playlist", :key="song.name") {{ song.name }}
-      = ' '
-      button(@click="delSong(song._id)") X
+    li.playlist-songs(v-for="song in user.playlist", :key="song.name") {{song.artist.name}} - {{song.name}}
+      <button class="button is-danger is-light is-small" @click="delSong(song._id)">x</button>
 </template>
 
 <style scoped>
@@ -44,7 +43,4 @@ article
   border-radius: 20px;
 }
 
-button {
-  color: #682c2c;
-}
 </style>

@@ -34,7 +34,6 @@ export default {
         this.errors.genre = "Genre required.";
       }
       if (JSON.stringify(this.errors) === "{}") {
-        console.log('girdi');
         this.releaseSong(newSong);
         this.clicked = true;
         this.song = "";
@@ -54,7 +53,8 @@ export default {
 <template lang="pug">
 article.container
   form(@submit.prevent="onSubmit")
-    h3.title {{ artist.name }} Release Song
+    //- h3.title {{ artist.name }} Release Song 
+    <h5 class="title is-5">{{ artist.name }} Release Song</h5>
     input(type="text", v-model="song", placeholder="Type in song") 
     select(v-model="genre")
       option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
@@ -116,7 +116,7 @@ input[type="submit"]:hover {
   margin: 20px;
   min-width: 200px;
 }
-.title {
+/* .title {
   margin: 0 auto;
   width: 200px;
   text-align: center;
@@ -126,7 +126,7 @@ input[type="submit"]:hover {
   -ms-transition: 0.2s ease all;
   -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
-}
+} */
 
 .title:hover {
   color: cornflowerblue;
