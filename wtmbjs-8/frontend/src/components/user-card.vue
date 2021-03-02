@@ -1,10 +1,13 @@
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "userCard",
   props: ["user"],
   methods: {
     ...mapActions(["fetchUser", "delUser"]),
+    gotoPlaylist(){
+      this.$router.push('/artist'); 
+    }
   },
 };
 </script>
@@ -14,7 +17,7 @@ article.card
   img(:src="`https://picsum.photos/300/200?random=${user._id}`", alt="")
   <div class= "userDetail">
     h1 {{ user.name }}
-    button.select-button(@click="fetchUser(`${user._id}`)") Select
+    button.select-button(@click="fetchUser(`${user._id} `); gotoPlaylist()") Select
     button.delete-button(@click="delUser(`${user._id}`)") Delete
   </div>
 </template>
