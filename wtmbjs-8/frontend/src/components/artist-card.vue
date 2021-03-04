@@ -5,14 +5,14 @@ import Button from "./button.vue";
 export default {
   name: "ArtistCard",
   props: ["artist"],
-  components: {Button},
+  components: { Button },
   computed: {
-    ...mapState(["song"]),
+    ...mapState(["song", "error"]),
   },
   methods: {
     ...mapActions(["addSong", "release", "fetchArtist"]),
-    openNewTab: function () {
-      const path=window.location.href+"/release";
+    openNewTab: function() {
+      const path = window.location.href + "/release";
       window.open(path, "_blank");
     },
   },
@@ -28,6 +28,7 @@ article.card
     span.songs(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
       span(@click="addSong(song._id)")
         Button
+  span(v-if="error") {{error}}
   </div>
 </template>
 

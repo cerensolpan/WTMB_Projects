@@ -15,6 +15,7 @@ export default new Vuex.Store({
     newSong: '',
     newArtist: '',
     newGenre: '',
+    error: '',
   },
   mutations: {
     SET_ARTISTS(state, data) {
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     SET_NEWGENRE(state, data) {
       state.genres.unshift(data);
     },
+    SET_ERROR(state, data) {
+      state.error = data;
+    }
 
   },
 
@@ -98,6 +102,7 @@ export default new Vuex.Store({
         .then(res => commit("SET_NEWUSER", res.data))
         .catch((err) => console.log(err));
     },
+
     async addArtist({
       commit
     }, artist) {
@@ -119,17 +124,24 @@ export default new Vuex.Store({
       dispatch
     }, songId) {
       let userId = this.state.user._id;
-      await axios({
-          method: "post",
-          url: `${process.env.VUE_APP_API_URL}/user/add-playlist`,
-          data: {
-            userId: userId,
-            songId: songId,
-          },
-        })
-        .then((res) => dispatch('fetchUser', userId))
-        .catch((err) => console.log(err));
+      let playlist = this.state.user.playlist;
+      if (playlist.find(item => item._id === songId)) {
+        const error = "This song is already on your playlist!";
+        commit("SET_ERROR", error);
+      } else {
+        await axios({
+            method: "post",
+            url: `${process.env.VUE_APP_API_URL}/user/add-playlist`,
+            data: {
+              userId: userId,
+              songId: songId,
+            },
+          })
+          .then((res) => dispatch('fetchUser', userId))
+          .catch((err) => console.log(err));
+      }
     },
+
 
     async delSong({
       commit,
