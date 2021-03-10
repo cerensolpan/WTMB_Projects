@@ -197,6 +197,13 @@ export default new Vuex.Store({
       let data = {};
       localStorage.userId = null;
       commit("SET_USER", data);
+    },
+
+    async resetError({
+      commit
+    }) {
+      let data = "";
+      commit("SET_ERROR", data);
     }
   },
   modules: {},
