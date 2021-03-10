@@ -9,11 +9,22 @@ export default {
   computed: {
     ...mapState(["song", "error"]),
   },
+  watch: {
+    error: function(newErr, oldErr) {
+      if (this.error != "") {
+        this.showAlert();
+      }
+    },
+  },
   methods: {
-    ...mapActions(["addSong", "release", "fetchArtist"]),
+    ...mapActions(["addSong", "release", "fetchArtist", "resetError"]),
     openNewTab: function() {
       const path = window.location.href + "/release";
       window.open(path, "_blank");
+    },
+    showAlert() {
+      this.$swal(this.error);
+      this.resetError();
     },
   },
 };
@@ -28,7 +39,6 @@ article.card
     span.songs(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
       span(@click="addSong(song._id)")
         Button
-  span(v-if="error") {{error}}
   </div>
 </template>
 
