@@ -18,10 +18,6 @@ export default {
   },
   methods: {
     ...mapActions(["addSong", "release", "fetchArtist", "resetError"]),
-    openNewTab: function() {
-      const path = window.location.href + "/release";
-      window.open(path, "_blank");
-    },
     showAlert() {
       this.$swal(this.error);
       this.resetError();
@@ -31,48 +27,39 @@ export default {
 </script>
 
 <template lang="pug">
-article.card
-  <div class= "artistDetail">
-    h2 {{ artist.name }}
-    button.release(@click="fetchArtist(artist._id)")
-      router-link.link(:to="{ path: 'artist/release' }") Release Song
-    span.songs(v-for="song in artist.songs", :song="song", :key="song._id") {{ song.name }}
+<div class="columns">
+  <div class="column">
+    <h6 class="title is-6"> {{ artist.name }} </h6>
+    span(@click="fetchArtist(artist._id)")
+      <router-link class="button is-small is-link is-light" :to="{ path: 'artist/release' }" > Release Song </router-link>
+    span.songs(v-for="song in artist.songs", :song="song", :key="song._id") 
+      span.songName {{ song.name }}
       span(@click="addSong(song._id)")
         Button
   </div>
+</div>
 </template>
 
 <style scoped>
-.card {
+.columns {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   text-align: center;
-  margin: 20px;
+  margin: 20px auto;
   background: #ccc2d6;
   padding: 40px;
   border: 2px solid grey;
   border-radius: 20px;
   word-break: break-word;
+  width: 21%;
+  min-width: 200px;
+  padding: 10px;
 }
 
-/* button {
-  color: #8783d1;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid #8783d1;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 10px;
+.title {
+  margin-bottom: 10px;
 }
-
-button:hover {
-  background-color: #8783d1;
-  color: white;
-} */
 
 .songs {
   margin-left: 15px;
@@ -80,15 +67,10 @@ button:hover {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
-.link {
-  color: #8783d1;
-  text-decoration: none;
-}
-
-.link:hover {
-  background-color: #8783d1;
-  color: white;
+.songName {
+  text-align: left;
 }
 </style>

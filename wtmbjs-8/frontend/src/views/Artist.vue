@@ -41,11 +41,9 @@ main
     section.new
       new-card(title="genre", cardType="GenreCard")
   section.cards
-    section.card
     artist-card(v-for="artist in artists", :artist="artist", :key="artist._id")
   section.cards
-    section.card
-      genre-card(v-for="genre in genres", :genre="genre", :key="genre._id")
+    genre-card(v-for="genre in genres", :genre="genre", :key="genre._id")
 </template>
 
 <style scoped>
@@ -62,6 +60,7 @@ main {
 
 .title {
   margin: 20px;
+  font-size: 25px;
 }
 
 .cards {

@@ -1,15 +1,16 @@
 <script>
 export default {
   name: "Button",
-}
+};
 </script>
 
 <template lang="pug">
-    <button class="button is-link is-light is-small is-fullwidth">+</button>
+    <button class="button is-link is-light is-small"><i class="fas fa-plus" style="color:black" ></i></button>
 </template>
 
 <style scoped>
-button{
-  margin:2px;
+button {
+  margin-left: 1rem;
+  width: 30px;
 }
 </style>
