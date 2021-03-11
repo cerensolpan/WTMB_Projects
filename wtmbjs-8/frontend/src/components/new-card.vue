@@ -7,7 +7,6 @@ export default {
     return {
       artist: "",
       genre: "",
-      clicked: false,
     };
   },
   methods: {
@@ -27,6 +26,14 @@ export default {
         this.genre = "";
       }
     },
+
+    alertAdd() {
+      if (this.cardType === "ArtistCard") {
+        this.$swal("This artist is added.");
+      } else if (this.cardType === "GenreCard") {
+        this.$swal("This genre is added.");
+      }
+    },
   },
 };
 </script>
@@ -37,9 +44,7 @@ article.container
     <h6 class="title is-6"> Add a new {{title}} </h6>
     <input class="input" v-if="cardType === 'ArtistCard'" v-model="artist" type="text" placeholder="Type in artist name">
     <input class="input" v-if="cardType === 'GenreCard'" v-model="genre" type="text" placeholder="Type in genre name">
-    <input type="submit" value="Submit" class="button is-link is-light" @click="() => (clicked = true)">
-  <span class="notification is-success" v-if="clicked && cardType === 'ArtistCard'" > This artist is added. </span>
-  <span class="notification is-success" v-if="clicked && cardType === 'GenreCard'" > This genre is added. </span>
+    <input type="submit" value="Submit" class="button is-link is-light" @click="alertAdd()">
 </template>
 
 <style scoped>
