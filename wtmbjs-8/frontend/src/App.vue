@@ -15,6 +15,7 @@
   text-align: center;
   color: #2c3e50;
   background: #e9d8d9;
+  font-size: 13px;
 }
 
 #nav {
