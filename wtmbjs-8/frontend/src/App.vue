@@ -23,6 +23,10 @@
   margin: 0;
   background: #bfa4a4;
   font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
 }
 
 #nav a {

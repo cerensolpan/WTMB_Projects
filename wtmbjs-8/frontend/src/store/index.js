@@ -175,6 +175,7 @@ export default new Vuex.Store({
         })
         .then(() => console.log('ok'))
         .catch((err) => console.log(err));
+      window.location.href = window.location.origin + `/artist`;
     },
 
     async fetchGenres({

@@ -33,12 +33,12 @@ export default {
 main
   section.title
     span Select your songs and add playlist
-  section.columns
-    section.playlist
+  section.is-flex.is-flex-direction-row.is-flex-wrap-wrap.is-justify-content-center
+    section.is-4
       playlist-card
-    section.new
+    section.is-4
       new-card(title="artist", cardType="ArtistCard")
-    section.new
+    section.is-4
       new-card(title="genre", cardType="GenreCard")
   section.cards
     artist-card(v-for="artist in artists", :artist="artist", :key="artist._id")
