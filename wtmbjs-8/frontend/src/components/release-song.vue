@@ -9,39 +9,51 @@ export default {
     return {
       song: "",
       genre: {},
+      add_new_genre: null,
       errors: {},
       clicked: false,
     };
   },
   methods: {
-    ...mapActions(["releaseSong", "fetchGenres"]),
+    ...mapActions(["releaseSong", "fetchGenres", "addGenre"]),
     onSubmit(e) {
       e.preventDefault();
-      let newSong = {
-        name: this.song,
-        artistId: this.artist._id,
-        genreId: this.genre,
-      };
-      console.log(newSong);
       this.errors = {};
       if (this.song == "") {
         this.errors.song = "Song required.";
       }
-      // if (!this.artist) {
-      //   this.errors.artist = "Artist required.";
-      // }
-      if (!this.genre) {
-        this.errors.genre = "Genre required.";
-      }
-      if (JSON.stringify(this.errors) === "{}") {
-        this.releaseSong(newSong);
-        this.clicked = true;
-        this.song = "";
-        this.genre = {};
-        this.errors = {};
+      let genreId;
+      if (this.add_new_genre) {
+        let newGenre = {
+          name: this.add_new_genre,
+        };
+        this.addGenre(newGenre);
+        setTimeout(() => {
+          genreId = this.genres[0]._id;
+        }, 1000);
       } else {
-        this.clicked = false;
+        genreId = this.genre;
       }
+      setTimeout(() => {
+        let newSong = {
+          name: this.song,
+          artistId: this.artist._id,
+          genreId,
+        };
+
+        if (!this.genre) {
+          this.errors.genre = "Genre required.";
+        }
+        if (JSON.stringify(this.errors) === "{}") {
+          this.releaseSong(newSong);
+          this.clicked = true;
+          this.song = "";
+          this.genre = {};
+          this.errors = {};
+        } else {
+          this.clicked = false;
+        }
+      }, 1200);
     },
   },
   created() {
@@ -52,88 +64,50 @@ export default {
 
 <template lang="pug">
 article.container
-  form(@submit.prevent="onSubmit")
-    //- h3.title {{ artist.name }} Release Song 
-    <h5 class="title is-5">{{ artist.name }} Release Song</h5>
-    input(type="text", v-model="song", placeholder="Type in song") 
-    select(v-model="genre")
-      option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
-    input.button(type="submit", value="Submit")
-  h3.add(v-if="clicked") This song is released.
+  form.is-flex-direction-column(@submit.prevent="onSubmit")
+    <h6 class="title is-6 ">{{ artist.name }} Release Song</h6>
+      input(type="text",class="is-4  input  is-small is-rounded", v-model="song", placeholder="Type in song") 
+      div.select.is-small.is-rounded 
+        select.is-4(v-model="genre")
+          option(disabled value="") Please select a genre
+          option(value="add_new_genre") Add a new genre
+          option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
+    input(type="text ",class="is-4  input  is-small is-rounded", v-model="add_new_genre", v-if="genre==='add_new_genre'" placeholder="Type in genre")
+    <input type="submit" value="Release Song" class="button is-small is-warning is-hovered">
+  h3.add(v-if="clicked") 
   h3.add(v-if="JSON.stringify(this.errors) != '{}'") {{ errors }}
 </template>
 
 <style scoped>
+.container {
+  display: inline-block;
+  text-align: left;
+  padding: 10px;
+  border-radius: 3px;
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
+
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px;
+  padding: 20px;
   border: 1px solid grey;
   border-radius: 3px;
-  margin: 20px;
-  width: 250px;
-  height: 150px;
-}
-input[type="text"] {
-  flex: 8;
-  padding: 10px;
-  border: 1px solid #a38b00;
-  outline: 0;
-  margin: 10px auto;
-}
-select {
-  flex: 8;
-  padding: 10px;
-  border: 1px solid #a38b00;
-  outline: 0;
-  margin-right: 10px;
+  margin: 0px;
 }
 
-input[type="submit"] {
-  color: #8783d1;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid #8783d1;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
+.title {
+  margin: 10px;
+}
+.select,
+.select select {
+  width: 100%;
 }
 
-input[type="submit"]:hover {
-  background-color: #8783d1;
-  color: white;
-}
-.container {
-  font-family: "Roboto", sans-serif;
-  display: inline-block;
-  text-align: left;
-  padding: 20px;
-  border-radius: 3px;
-  margin: 20px;
-  min-width: 200px;
-}
-/* .title {
-  margin: 0 auto;
-  width: 200px;
-  text-align: center;
-  color: #2c3e50;
-  -webkit-transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -ms-transition: 0.2s ease all;
-  -o-transition: 0.2s ease all;
-  transition: 0.2s ease all;
-} */
-
-.title:hover {
-  color: cornflowerblue;
-}
-.add {
-  text-align: center;
-  font-size: 15px;
-  color: #8783d1;
+input {
+  margin: 10px;
 }
 </style>
