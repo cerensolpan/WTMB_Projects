@@ -29,8 +29,9 @@ export default {
 main
   section
     span Please create a new user or select a user, then go to Artist and Genre page for creating a playlist
-    h3.selected(v-if="JSON.stringify(user) != '{}'") Selected User: {{ user.name }}
-      button(@click="logOut") Remove the selected user
+    h6.selected.title.is-6.m-2(v-if="JSON.stringify(user) != '{}'") Selected User: {{ user.name }}
+      button(@click="logOut" class="button is-small is-link is-light m-2") Remove the selected user
+    <h6 class="title is-6 m-2" v-else>Please select a user</h6>
     h3(v-else) Please select a user
   section.new
     new-user
@@ -58,22 +59,5 @@ section {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
-
-button {
-  color: #8783d1;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid #8783d1;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 10px;
-}
-
-button:hover {
-  background-color: #8783d1;
-  color: white;
 }
 </style>
