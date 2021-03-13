@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       song: "",
-      genre: {},
+      genre: "",
       add_new_genre: null,
       errors: {},
       clicked: false,
@@ -63,51 +63,35 @@ export default {
 </script>
 
 <template lang="pug">
-article.container
-  form.is-flex-direction-column(@submit.prevent="onSubmit")
-    <h6 class="title is-6 ">{{ artist.name }} Release Song</h6>
-      input(type="text",class="is-4  input  is-small is-rounded", v-model="song", placeholder="Type in song") 
+article.container.is-inline
+  form.is-flex.is-flex-direction-column.is-flex-wrap-wrap.is-align-content-center.is-justify-content-center.is-align-items-center.p-6(@submit.prevent="onSubmit")
+    <h6 class="title mt-2 mb-2 is-6 ">{{ artist.name }} Release Song</h6>
+      input.mt-2.mb-2(type="text",class="is-4  input  is-small is-rounded", v-model="song", placeholder="Type in song") 
       div.select.is-small.is-rounded 
         select.is-4(v-model="genre")
-          option(disabled value="") Please select a genre
+          option(disabled value="" selected="genre") Please select a genre
           option(value="add_new_genre") Add a new genre
           option(v-for="genre in genres", v-bind:value="genre._id") {{ genre.name }}
-    input(type="text ",class="is-4  input  is-small is-rounded", v-model="add_new_genre", v-if="genre==='add_new_genre'" placeholder="Type in genre")
-    <input type="submit" value="Release Song" class="button is-small is-warning is-hovered">
+    input(type="text ",class="is-4 mt-2  input  is-small is-rounded", v-model="add_new_genre", v-if="genre==='add_new_genre'" placeholder="Type in genre")
+    <input type="submit" value="Release Song" class="button mt-4 mb-2 is-small is-warning is-hovered">
   h3.add(v-if="clicked") 
   h3.add(v-if="JSON.stringify(this.errors) != '{}'") {{ errors }}
 </template>
 
 <style scoped>
 .container {
-  display: inline-block;
-  text-align: left;
-  padding: 10px;
   border-radius: 3px;
 }
 
 form {
-  display: flex;
-  flex-wrap: wrap;
-
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
   border: 1px solid grey;
   border-radius: 3px;
   margin: 0px;
+  background: #ccc2d6;
 }
 
-.title {
-  margin: 10px;
-}
 .select,
 .select select {
   width: 100%;
-}
-
-input {
-  margin: 10px;
 }
 </style>

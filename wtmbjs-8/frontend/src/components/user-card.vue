@@ -5,9 +5,9 @@ export default {
   props: ["user"],
   methods: {
     ...mapActions(["fetchUser", "delUser"]),
-    gotoPlaylist(){
-      this.$router.push('/artist'); 
-    }
+    gotoPlaylist() {
+      this.$router.push("/artist");
+    },
   },
 };
 </script>
@@ -16,9 +16,9 @@ export default {
 article.card
   img(:src="`https://picsum.photos/300/200?random=${user._id}`", alt="")
   <div class= "userDetail">
-    h1 {{ user.name }}
-    button.select-button(@click="fetchUser(`${user._id} `); gotoPlaylist()") Select
-    button.delete-button(@click="delUser(`${user._id}`)") Delete
+    h1.mb-2 {{ user.name }}
+    button.select-button(@click="fetchUser(`${user._id} `); gotoPlaylist()",class="button is-small is-link is-light mb-2") Select
+    button.delete-button(@click="delUser(`${user._id}`)",class="button is-small is-link is-light") Delete
   </div>
 </template>
 
@@ -43,6 +43,11 @@ h1 {
   margin: 0;
 }
 
+.button,
+.button button {
+  width: 100%;
+}
+
 .card {
   display: flex;
   flex-wrap: wrap;
@@ -53,22 +58,6 @@ h1 {
   border: 1px solid grey;
   border-radius: 3px;
   margin: 20px;
-}
-
-button {
-  color: #8783d1;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: white;
-  border: 1px solid #8783d1;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 2px;
-}
-
-button:hover {
-  background-color: #8783d1;
-  color: white;
+  background: #ccc2d6;
 }
 </style>

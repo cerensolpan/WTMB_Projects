@@ -42,8 +42,8 @@ export default {
 article.container
   form(@submit.prevent="onSubmit")
     <h6 class="title is-6"> Add a new {{title}} </h6>
-    <input class="input is-small" v-if="cardType === 'ArtistCard'" v-model="artist" type="text" placeholder="Type in artist name" size=small>
-    <input class="input is-small" v-if="cardType === 'GenreCard'" v-model="genre" type="text" placeholder="Type in genre name">
+    <input class="input is-small is-rounded" v-if="cardType === 'ArtistCard'" v-model="artist" type="text" placeholder="Type in artist name" size=small>
+    <input class="input is-small is-rounded" v-if="cardType === 'GenreCard'" v-model="genre" type="text" placeholder="Type in genre name">
     <input type="submit" value="Submit" class="button is-small is-link is-light" @click="alertAdd()">
 </template>
 
