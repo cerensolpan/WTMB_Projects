@@ -3,6 +3,8 @@
 
 The project is developed for the Women Techmakers Berlin Fullstack [Javascript course.](https://www.youtube.com/watch?v=xCr2v8I4x-I&list=PL9pDl_Oth4cqVnLrf5DCK4a_HhoAEhV4a) 
 
+The aim of the project is to create a playlist with songs published by the artist.
+
 Here is a [Live Version](https://wtmb-ceren-frontend.herokuapp.com/)  🚀
 
 ## Technologies Used
